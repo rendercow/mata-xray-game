@@ -1,0 +1,258 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>마타의 X-RAY 탐지 대작전 v1.3.1</title><style>
+:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#173b53;--sky:#c7e7f7;--panel:#d8edf8;--deep:#0d4971;--cream:#f6f2e8;--accent:#ffbf47}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#e8fbff,#add8eb 55%,#7cb4d1)}main{max-width:1160px;margin:auto;padding:16px}.dashboard{position:relative;background:linear-gradient(180deg,#cde9f7,#b8ddf0);border-radius:26px;border:4px solid #ecf8fe;box-shadow:0 10px 0 #71aecd,0 18px 28px #2d6e8d3a;padding:16px 16px 14px 300px;min-height:285px;overflow:visible}.hero{position:absolute;left:6px;top:-22px;width:290px;pointer-events:none;filter:drop-shadow(0 6px 4px #2e678822);z-index:5}.heroMata{display:block;max-width:100%;height:auto}header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{margin:0;color:#0c4d7b;font-size:clamp(23px,3vw,35px);letter-spacing:-1px}.subtitle{color:#44748d;font-size:14px}.pill{background:#fff9;border:2px solid white;padding:9px 14px;border-radius:30px;font-weight:800;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 8px}.stat{background:var(--cream);border:2px solid white;border-radius:16px;text-align:center;padding:10px 5px;box-shadow:0 4px 0 #5a90ab28}.stat small{display:block;color:#6d8c9b;font-size:11px;font-weight:800}.stat strong{display:block;color:#125b84;font-size:24px}.stat.speed strong{color:#e0782d}.brief{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.speechbox{background:#cfe3ef;border:3px solid #effaff;border-radius:18px;min-height:84px;padding:16px 18px 14px 18px;color:#175378;box-shadow:inset 0 1px 0 #ffffffa0}.speechbox .title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}.speechbox .desc{font-weight:800;font-size:15px}.speechbox .sub{margin-top:6px;font-size:12px;color:#4b7084}.controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}button{background:var(--accent);color:#654000;border:0;border-radius:15px;padding:16px 18px;font-weight:900;font-size:15px;box-shadow:0 5px #c68c30;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px #c68c30}.secondary{background:white;color:#245a76;box-shadow:0 5px #b2ccd9}.stageWrap{margin-top:16px;border:8px solid #f7fcff;border-radius:20px;overflow:hidden;background:#122a3b;box-shadow:0 11px 0 #498eaa,0 17px 28px #0c446244}canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}.help{background:#ffffffc7;padding:13px 16px;border-radius:14px;margin-top:14px;font-size:13px;line-height:1.75;color:#355e73}.records{margin-top:8px;color:#456d82;font-size:12px}.tag{display:inline-block;background:#e8f8fe;padding:2px 7px;border-radius:6px;font-weight:800;color:#195c7c}@media(max-width:900px){.dashboard{padding-left:225px;min-height:255px}.hero{width:210px;top:-2px}.speechbox .title{font-size:23px}}@media(max-width:720px){main{padding:8px}.dashboard{padding:152px 10px 12px 10px;min-height:auto}.hero{width:175px;left:50%;transform:translateX(-50%);top:-6px}.hud{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:7px 2px}.stat strong{font-size:17px}.stat small{font-size:9px}.brief{grid-template-columns:1fr}.speechbox{min-height:70px}.speechbox .title{font-size:20px}.stageWrap{border-width:4px}button{padding:12px 13px;font-size:14px}}</style></head><body><main><section class="dashboard"><div class="hero"><img id="heroMata" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.3.1</small></h1><div class="subtitle">CUSTOMS MATA · X-RAY 효과 추가 강화 · 클릭/클리핑 보정</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점</div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><div class="help">🎯 <b>플레이:</b> 오른쪽에서 왼쪽으로 움직이는 가방 속 <b>의심물품을 정확히 클릭</b>하세요. 총·도검 +100 · 마약 의심 +150 · 명품 +70 · 액체류 +50점. <b>일반물품 클릭 -30점 / 의심물품 놓침 -40점 / 빈 곳 클릭 0점.</b> <b>검은 리트리버 탐지견은 마약 의심 물질이 든 캐리어 앞에서만 멈춰 컹컹 알려줍니다.</b> 순찰 중에는 업로드한 헥헥 사운드, 경보 시에는 업로드한 멍멍 사운드가 재생됩니다. 이번 버전은 X-ray 시각효과를 한 단계 더 강화하면서, 탐지견 클릭 방해를 제거하고 캐리어 밖으로 물건이 튀어나와 보이는 문제를 함께 보정한 개발 버전입니다. <span class="tag">45초 속도전</span><br>※ 오락용 가상 X-ray 영상입니다. 명품·액체류 등은 게임상의 확인 대상이며 실제 위법성이나 마약 여부를 X-ray 영상만으로 확정할 수 없습니다.</div><div class="records" id="records"></div></main><script>
+'use strict';
+const C=document.querySelector('#game'),g=C.getContext('2d'),$=id=>document.getElementById(id),W=C.width,H=C.height;
+const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const CATS={weapon:{name:'총·도검',points:100},drug:{name:'마약 의심',points:150},luxury:{name:'명품',points:70},liquid:{name:'액체류',points:50},normal:{name:'일반물품',points:0}};
+const OPTIONS={
+weapon:['pistol','revolver','rifle','knife','chefknife','dagger','sword','longknife','machete','scissors','longknife','machete'],
+drug:['vacuumbrick','doublebrick','zipbag','powderpouch','capsulestrip','pillbottle','vialpack','bundle'],
+luxury:['bag_lv','bag_gg','bag_cc','bag_prada','bag_dior','watch','watch2','jewelry'],
+liquid:['bottle','flask','vial','spray'],
+normal:['laptop','book','headphone','shoe','tshirt','coat','pants','dress','charger','camera','umbrella','comb','tablet','backpack','duffel','hairdryer','drill','shaver','tripod','perfume','gamepad','flashlight','toycar','binoculars','toothbrush']};
+const SCALE={
+pistol:[84,50],revolver:[86,52],rifle:[128,43],knife:[86,22],chefknife:[108,28],dagger:[72,24],sword:[132,26],longknife:[116,24],machete:[126,34],scissors:[78,58],
+vacuumbrick:[72,50],doublebrick:[78,64],zipbag:[76,58],powderpouch:[82,61],capsulestrip:[82,50],pillbottle:[50,82],vialpack:[78,58],bundle:[88,56],
+bag_lv:[86,72],bag_gg:[88,74],bag_cc:[88,72],bag_prada:[92,74],bag_dior:[92,74],watch:[49,82],watch2:[50,80],jewelry:[62,46],
+bottle:[39,87],flask:[53,80],vial:[34,66],spray:[47,78],
+laptop:[91,65],book:[70,75],headphone:[66,72],shoe:[95,40],tshirt:[82,70],coat:[86,84],pants:[72,88],dress:[76,90],charger:[67,55],camera:[64,51],umbrella:[100,34],comb:[81,29],tablet:[67,90],backpack:[84,88],duffel:[102,56],hairdryer:[90,62],drill:[95,72],shaver:[54,80],tripod:[84,92],perfume:[48,76],gamepad:[90,48],flashlight:[88,32],toycar:[86,42],binoculars:[88,44],toothbrush:[92,20]};
+let bags=[],fx=[],running=false,paused=false,remain=45,score=0,hits=0,errors=0,combo=0,elapsed=0,spawn=0,last=0,raf=0,seq=0,sound=true,audioCtx=null,counts={weapon:0,drug:0,luxury:0,liquid:0},best=0;
+let mataPoseClock=0,mataState='inspect';
+const dog={x:150,y:798,dir:1,patrolMin:142,patrolMax:W-155,step:0,mode:'patrol',targetX:150,barkClock:0,barkCooldown:0,pantCooldown:.2,targetBagId:null,lastAnnouncedBagId:null,lookPhase:0,sniffPhase:0};
+const barkAudio=new Audio('assets/bark.mp3'); barkAudio.preload='auto'; barkAudio.volume=.84;
+const pantAudio=new Audio('assets/pant.mp3'); pantAudio.preload='auto'; pantAudio.volume=.58;
+const dogSprite=new Image(); dogSprite.src='assets/dog_neon_tight.png';
+const dogDraw={x:0,y:0,w:0,h:0,scale:0};
+try{best=Number(localStorage.getItem('mata_xray_best_v06')||localStorage.getItem('mata_xray_best_v05')||localStorage.getItem('mata_xray_best_v04')||0)}catch(e){}$('best').textContent=best;
+function tone(freq=640,dur=.085,kind='sine',vol=.05,start=0){if(!sound)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();let now=audioCtx.currentTime+start,o=audioCtx.createOscillator(),v=audioCtx.createGain();o.type=kind;o.frequency.setValueAtTime(freq,now);o.frequency.exponentialRampToValueAtTime(Math.max(50,freq*.72),now+dur);v.gain.setValueAtTime(vol,now);v.gain.exponentialRampToValueAtTime(.001,now+dur);o.connect(v).connect(audioCtx.destination);o.start(now);o.stop(now+dur)}catch(e){}}
+function beep(freq=640,dur=.085,kind='sine'){tone(freq,dur,kind,.052)}
+function playFile(a){if(!sound)return;try{a.pause();a.currentTime=0;a.play().catch(()=>{});}catch(e){}}
+function say(title,desc,sub,pose='inspect'){ $('speechTitle').textContent=title; $('speechDesc').textContent=desc; $('speechSub').textContent=sub; $('heroMata').src='assets/'+pose+'.png'; mataState=pose; mataPoseClock=2.5; }
+function factor(){return clamp(1+Math.max(0,combo-1)*.13+elapsed*.007,1,2.45)}
+function beltSpeed(){return 143*factor()}
+function updateHud(){const vals={time:Math.max(0,Math.ceil(remain)),score,hits,combo,errors,speed:'×'+factor().toFixed(1)};for(let k in vals)$(k).textContent=vals[k];$('records').textContent=`적발 실적  |  총·도검 ${counts.weapon}   ·   마약 의심 ${counts.drug}   ·   명품 ${counts.luxury}   ·   액체류 ${counts.liquid}`}
+function bagFactory(){
+let sizeType=pick(['small','small','medium','medium','large']);
+let w,h,n;
+if(sizeType==='small'){w=rand(170,235);h=rand(135,180);n=3+Math.floor(rand(0,2));}
+else if(sizeType==='large'){w=rand(310,420);h=rand(205,275);n=5+Math.floor(rand(0,3));}
+else{w=rand(235,320);h=rand(170,225);n=4+Math.floor(rand(0,3));}
+let items=[],suspectCount=Math.random()<.12?0:Math.random()<.36?2:1;
+let suspectSlots=new Set();
+while(suspectSlots.size<suspectCount && suspectSlots.size<n)suspectSlots.add(Math.floor(rand(0,n)));
+let shellStyle=sizeType==='large'?pick(['hard','hard','soft']):pick(['hard','soft','duffel']);
+let shellInsetX=shellStyle==='duffel'?w*.18:w*.12;
+let shellInsetY=shellStyle==='duffel'?h*.19:h*.14;
+for(let i=0;i<n;i++){
+  let cat=suspectSlots.has(i)?pick(['weapon','drug','luxury','liquid']):'normal',type=pick(OPTIONS[cat]);
+  let base=SCALE[type],stretch=['rifle','sword','longknife','machete','chefknife'].includes(type)?1.12:1;
+  let size=rand(.64,1.24)*(sizeType==='large'?1.08:(sizeType==='small'?.9:1))*stretch;
+  let iw=base[0]*size,ih=base[1]*size;
+  let maxDx=Math.max(0,w/2-shellInsetX-iw*.52), maxDy=Math.max(0,h/2-shellInsetY-ih*.52);
+  let dx=0,dy=0,best={dx:0,dy:0,score:-1};
+  for(let attempts=0;attempts<64;attempts++){
+    dx=rand(-maxDx,maxDx); dy=rand(-maxDy,maxDy);
+    let score=items.length?Math.min(...items.map(p=>Math.hypot((dx-p.dx)*.82,(dy-p.dy)*1.05)-((iw+p.w)*.18+24))):999;
+    if(score>best.score) best={dx,dy,score};
+    if(items.every(p=>Math.hypot((dx-p.dx)*.82,(dy-p.dy)*1.05)>((iw+p.w)*.20+(ih+p.h)*.03+(sizeType==='large'?20:14)))) break;
+  }
+  dx=best.dx; dy=best.dy;
+  items.push({cat,type,dx,dy,w:iw,h:ih,angle:rand(-.65,.65),found:false,seed:rand(0,10)})
+}
+return{x:W+w/2+10,y:rand(222,300),w,h,items,id:++seq,done:false,alertFlash:0,sizeType,shellStyle}
+}
+function path(points,close=true){g.beginPath();g.moveTo(...points[0]);for(let i=1;i<points.length;i++)g.lineTo(...points[i]);if(close)g.closePath()}
+function strokeFill(){g.fill();g.stroke()}
+function rr(x,y,w,h,r=3){g.beginPath();g.roundRect(x,y,w,h,r);strokeFill()}
+function line(pts){path(pts,false);g.stroke()}
+function ellipse(x,y,rx,ry){g.beginPath();g.ellipse(x,y,rx,ry,0,0,Math.PI*2);strokeFill()}
+function itemDraw(it,cx,cy){if(it.found)return;g.save();g.translate(cx,cy);g.rotate(it.angle);g.scale(it.w/90,it.h/90);let cat=it.cat;let styleMap={weapon:{base:'#75c8ff',mid:'#4192da',edge:'#ddf6ff',glow:'rgba(125,215,255,.35)',scan:'rgba(232,250,255,.18)',alpha:.95,material:'metal'},drug:{base:'#c26e1a',mid:'#8b430f',edge:'#ffd39e',glow:'rgba(249,160,81,.30)',scan:'rgba(255,224,179,.16)',alpha:.94,material:'organic'},luxury:{base:'#ffd165',mid:'#d79c3b',edge:'#fff0b0',glow:'rgba(255,209,86,.28)',scan:'rgba(255,241,196,.15)',alpha:.92,material:'dense'},liquid:{base:'#ffbf50',mid:'#d88b34',edge:'#ffe39e',glow:'rgba(255,191,80,.28)',scan:'rgba(255,232,176,.15)',alpha:.88,material:'liquid'},normal:{base:'#8fd6b7',mid:'#5ea48d',edge:'#d8fff0',glow:'rgba(164,247,214,.20)',scan:'rgba(228,255,247,.12)',alpha:.82,material:'mixed'}};let s=styleMap[cat];let grad=g.createLinearGradient(0,-50,0,50);grad.addColorStop(0,s.edge);grad.addColorStop(.22,s.base);grad.addColorStop(.78,s.mid);grad.addColorStop(1,s.edge);g.fillStyle=grad;g.strokeStyle=s.edge;g.lineWidth=4.2;g.globalAlpha=s.alpha;g.lineJoin='round';g.lineCap='round';g.shadowColor=s.glow;g.shadowBlur=10;g.shadowOffsetX=0;g.shadowOffsetY=0;
+const drawMaterialOverlay=(w=86,h=86)=>{g.save();g.globalCompositeOperation='lighter';g.globalAlpha=1;g.strokeStyle=s.scan;g.lineWidth=s.material==='metal'?1.8:1.3;for(let yy=-h/2+8;yy<h/2-5;yy+=(s.material==='liquid'?10:8)){g.beginPath();g.moveTo(-w/2+7,yy);g.lineTo(w/2-7,yy);g.stroke();}if(s.material==='metal'){g.strokeStyle='rgba(255,255,255,.18)';g.beginPath();g.moveTo(-w*.3,-h*.42);g.lineTo(w*.26,h*.34);g.stroke();}else if(s.material==='liquid'){g.fillStyle='rgba(255,247,201,.08)';g.beginPath();g.ellipse(0,8,w*.26,h*.12,0,0,Math.PI*2);g.fill();}else if(s.material==='organic'){g.fillStyle='rgba(255,227,174,.09)';for(let i=-1;i<=1;i++){g.beginPath();g.ellipse(i*14,0,11,16,0,0,Math.PI*2);g.fill();}}else if(s.material==='dense'){g.strokeStyle='rgba(255,249,194,.16)';g.beginPath();g.rect(-w*.33,-h*.22,w*.66,h*.44);g.stroke();}g.restore()};
+const drawLogo=(txt,y=10,size=15)=>{g.save();g.fillStyle='#fff4c7';g.strokeStyle='rgba(93,70,20,.92)';g.lineWidth=1.7;g.font=`900 ${size}px system-ui`;g.textAlign='center';g.strokeText(txt,0,y);g.fillText(txt,0,y);g.textAlign='left';g.restore()};
+const drawBagBase=(style='satchel')=>{g.fillStyle='#e2ab4d';g.strokeStyle='#fff0b9';g.lineWidth=4.1;if(style==='tote'){path([[-39,-24],[39,-24],[34,40],[-34,40]]);strokeFill();g.beginPath();g.arc(-14,-18,14,Math.PI,0);g.stroke();g.beginPath();g.arc(14,-18,14,Math.PI,0);g.stroke();g.strokeStyle='#b87d36';line([[-30,-4],[30,-4]]);}else if(style==='structured'){rr(-39,-14,78,54,10);g.beginPath();g.arc(0,-13,22,Math.PI,0);g.stroke();rr(-8,1,16,12,2);g.strokeStyle='#b87d36';line([[-31,10],[31,10]]);}else if(style==='flap'){rr(-40,-9,80,50,10);path([[-36,-6],[36,-6],[24,16],[-24,16]]);strokeFill();g.beginPath();g.arc(0,-8,21,Math.PI,0);g.stroke();rr(-8,9,16,10,3);}else{rr(-40,-14,80,55,9);g.beginPath();g.arc(0,-14,22,Math.PI,0);g.stroke();g.strokeStyle='#b5662f';rr(-8,3,16,12,2);}};
+switch(it.type){
+case 'pistol': path([[-41,-18],[14,-18],[28,-10],[28,-2],[17,3],[12,10],[7,10],[-3,38],[-18,32],[-12,8],[-41,8]]);strokeFill();g.fillStyle='#2b597e';rr(-23,-26,36,9,2);g.strokeStyle='#8ec6ef';g.lineWidth=2.2;line([[-29,-5],[9,-5]]);g.beginPath();g.arc(3,10,9,.15,Math.PI-.2);g.stroke();break;
+case 'revolver': rr(-42,-11,62,16,3);ellipse(8,-3,15,15);path([[10,5],[18,36],[1,41],[-10,11]]);strokeFill();rr(-31,-25,15,8,2);g.beginPath();g.arc(-2,7,11,.2,Math.PI-.15);g.stroke();break;
+case 'rifle': path([[-44,-7],[26,-7],[43,-11],[44,-4],[27,0],[24,6],[-3,6],[-8,17],[-18,20],[-14,6],[-44,6]]);strokeFill();rr(-22,-18,25,9,2);rr(-8,6,12,24,2);line([[24,-7],[44,-20],[45,-20]]);line([[-36,7],[-28,19]]);break;
+case 'knife': path([[-44,-7],[-6,-7],[34,-1],[41,3],[34,8],[-6,8],[-44,8]]);strokeFill();g.fillStyle='#203f5d';rr(-45,-12,24,25,4);break;
+case 'chefknife': path([[-42,-9],[-7,-9],[34,-6],[44,0],[33,11],[-7,8],[-42,8]]);strokeFill();g.fillStyle='#203f5d';path([[-44,-13],[-29,-13],[-18,12],[-44,12]]);strokeFill();break;
+case 'longknife': path([[-44,-8],[-8,-8],[32,-4],[44,0],[32,9],[-8,7],[-44,7]]);strokeFill();g.fillStyle='#203f5d';rr(-45,-13,21,25,4);g.strokeStyle='#a2d8ff';line([[-9,-2],[29,2]]);break;
+case 'machete': path([[-40,-10],[-8,-10],[23,-8],[42,2],[29,13],[-8,10],[-40,10]]);strokeFill();g.fillStyle='#22445f';path([[-42,-14],[-28,-14],[-22,14],[-42,14]]);strokeFill();break;
+case 'dagger': path([[0,-42],[12,-4],[0,18],[-12,-4]]);strokeFill();line([[-20,18],[20,18]]);rr(-5,18,10,28,3);break;
+case 'sword': path([[0,-45],[9,-31],[10,27],[-10,27],[-9,-31]]);strokeFill();g.strokeStyle='#95d7ff';line([[0,-34],[0,18]]);line([[-24,27],[24,27]]);rr(-5,27,10,20,3);break;
+case 'scissors': g.lineWidth=6.5;line([[3,-1],[41,-35]]);line([[4,2],[41,36]]);g.strokeStyle='#86c7f0';line([[5,0],[31,-19]]);line([[5,1],[31,20]]);g.strokeStyle=palette[cat][1];ellipse(-18,-16,14,12);ellipse(-18,18,14,12);ellipse(4,0,5,5);break;
+case 'vacuumbrick': rr(-36,-24,72,48,7); g.strokeStyle='#b56426'; g.lineWidth=2.5; line([[-30,-16],[30,16]]); line([[-30,16],[30,-16]]); rr(-28,-18,56,36,3); break;
+case 'doublebrick': rr(-41,-38,64,46,4); rr(-12,-4,56,42,4); g.strokeStyle='#b56426'; line([[-30,-22],[10,5]]); line([[-2,20],[30,-2]]); break;
+case 'zipbag': path([[-36,-30],[36,-30],[41,26],[-41,26]]); strokeFill(); g.strokeStyle='#f2bb79'; g.lineWidth=3; line([[-34,-22],[34,-22]]); line([[-28,-10],[18,15]]); break;
+case 'powderpouch': path([[-39,-26],[33,-33],[41,18],[26,31],[-29,27],[-43,-4]]); strokeFill(); g.strokeStyle='#f2bb79'; line([[-18,-7],[15,10]]); line([[-8,-18],[23,-3]]); break;
+case 'capsulestrip': rr(-40,-24,80,48,6); g.strokeStyle='#f2bb79'; g.lineWidth=2.5; for(let yy=-11;yy<=11;yy+=22){ for(let xx=-26;xx<=26;xx+=13){ ellipse(xx,yy,5,5); } } break;
+case 'pillbottle': rr(-17,-30,34,70,9); rr(-12,-43,24,15,4); g.strokeStyle='#f2bb79'; line([[-11,-4],[11,-4]]); line([[-11,10],[11,10]]); g.fillStyle='rgba(255,210,116,.35)'; rr(-11,-16,22,35,3); break;
+case 'vialpack': for(let i=0;i<4;i++){ rr(-39+i*20,-24,14,50,4); } g.strokeStyle='#f2bb79'; line([[-42,-6],[35,-6]]); break;
+case 'bundle': for(let i=0;i<3;i++){ rr(-40+i*24,-18+(i%2)*10,34,26,5); } g.strokeStyle='#f2bb79'; g.lineWidth=3; line([[-26,-18],[-8,29]]); line([[8,-20],[25,26]]); break;
+case 'bag_lv': drawBagBase('structured'); drawLogo('LV',18,17); break;
+case 'bag_gg': drawBagBase('tote'); drawLogo('GG',18,17); break;
+case 'bag_cc': drawBagBase('flap'); drawLogo('CC',16,17); break;
+case 'bag_prada': drawBagBase('structured'); drawLogo('PRADA',17,11); break;
+case 'bag_dior': drawBagBase('flap'); drawLogo('DIOR',17,12); break;
+case 'watch': case 'watch2': rr(-16,-45,32,90,5);g.fillStyle='#ceba60';ellipse(0,0,27,27);g.fillStyle='#628eac';ellipse(0,0,19,19);line([[0,0],[0,-14]]);line([[0,0],[12,8]]);break;
+case 'jewelry': ellipse(0,7,36,22);g.fillStyle='#f7c667';path([[-14,-20],[0,-40],[14,-20],[0,0]]);strokeFill();break;
+case 'bottle': rr(-17,-31,34,75,9);rr(-9,-43,18,14,3);g.strokeStyle='#ffd87d';line([[-13,15],[13,15]]);break;
+case 'flask': path([[-12,-44],[12,-44],[12,-23],[30,28],[22,42],[-22,42],[-30,28],[-12,-23]]);strokeFill();line([[-21,10],[21,10]]);break;
+case 'vial': rr(-15,-36,30,68,4);rr(-18,-45,36,12,3);break;
+case 'spray': rr(-18,-25,36,67,8);rr(-9,-44,16,20,3);rr(7,-43,30,9,3);break;
+case 'laptop': rr(-42,-27,84,52,4);g.fillStyle='#356783';rr(-35,-21,70,38,2);g.strokeStyle='#a5e5dd';line([[-45,30],[46,30]]);break;
+case 'book': rr(-39,-39,78,78,4);line([[-26,-35],[-26,34]]);for(let y=-23;y<30;y+=12)line([[-16,y],[26,y]]);break;
+case 'headphone': g.beginPath();g.arc(0,-3,34,Math.PI,0);g.stroke();rr(-43,-4,18,37,6);rr(25,-4,18,37,6);break;
+case 'shoe': path([[-45,9],[-24,-12],[5,-10],[19,8],[45,19],[43,29],[-44,29]]);strokeFill();line([[-17,1],[17,13]]);break;
+case 'tshirt': path([[-22,-35],[0,-22],[22,-35],[42,-9],[27,9],[20,40],[-20,40],[-27,9],[-42,-9]]);strokeFill(); break;
+case 'coat': path([[-20,-41],[0,-29],[20,-41],[34,-21],[27,40],[10,40],[7,-2],[0,6],[-7,-2],[-10,40],[-27,40],[-34,-21]]);strokeFill(); line([[0,-28],[0,39]]);break;
+case 'pants': path([[-24,-42],[24,-42],[18,10],[8,42],[-2,42],[-8,10],[-14,42],[-24,42],[-18,10]]);strokeFill(); break;
+case 'dress': path([[0,-43],[18,-28],[30,-4],[18,42],[-18,42],[-30,-4],[-18,-28]]);strokeFill(); line([[0,-43],[0,42]]); break;
+case 'charger': rr(-23,-26,45,55,5);line([[20,-2],[43,0],[45,32]]);rr(-13,-36,6,13,1);rr(2,-36,6,13,1);break;
+case 'camera': rr(-40,-21,80,56,6);ellipse(0,9,18,18);rr(-25,-32,26,11,2);break;
+case 'umbrella': g.beginPath();g.arc(0,0,43,Math.PI,0);g.stroke();line([[0,-42],[0,35],[12,42],[23,31]]);break;
+case 'comb': rr(-40,-12,80,17,2);for(let i=-36;i<40;i+=8)line([[i,5],[i,33]]);break;
+case 'tablet': rr(-32,-44,64,88,7);g.fillStyle='#407d95';rr(-26,-36,52,67,2);break;
+case 'backpack': rr(-30,-39,60,82,12);g.beginPath();g.arc(0,-38,14,Math.PI,0);g.stroke();line([[-18,-20],[-18,34]]);line([[18,-20],[18,34]]);g.strokeStyle='#a2ded4';line([[-16,-4],[16,-4]]);break;
+case 'duffel': path([[-41,-12],[-26,-30],[26,-30],[41,-12],[36,23],[-36,23]]);strokeFill();g.beginPath();g.arc(-10,-26,14,Math.PI,0);g.stroke();g.beginPath();g.arc(10,-26,14,Math.PI,0);g.stroke();line([[-20,-3],[20,-3]]);break;
+case 'hairdryer': path([[-42,-13],[6,-13],[28,-6],[34,0],[27,10],[6,13],[-42,13]]);strokeFill();path([[-4,11],[14,11],[8,44],[-8,44]]);strokeFill();g.strokeStyle='#9bd3bf';line([[-26,-3],[8,-3]]);break;
+case 'drill': path([[-42,-10],[14,-10],[28,-4],[35,4],[24,12],[-42,12]]);strokeFill();path([[-7,11],[12,11],[16,43],[1,43],[-6,20]]);strokeFill();rr(18,-5,18,11,2);break;
+case 'shaver': rr(-20,-36,40,72,10);rr(-17,-45,34,11,5);g.strokeStyle='#9bd3bf';line([[-12,-16],[12,-16]]);line([[-12,0],[12,0]]);line([[-12,16],[12,16]]);break;
+case 'tripod': line([[0,-42],[0,35]]);line([[0,-12],[-31,40]]);line([[0,-12],[31,40]]);rr(-12,-48,24,16,3);break;
+case 'perfume': rr(-18,-22,36,58,8);rr(-9,-39,18,18,4);g.strokeStyle='#9bd3bf';line([[-9,10],[9,10]]);break;
+case 'gamepad': path([[-39,-8],[-22,-24],[22,-24],[39,-8],[31,17],[11,24],[-11,24],[-31,17]]);strokeFill();ellipse(-18,-1,8,8);ellipse(18,-1,8,8);line([[0,-8],[0,8]]);line([[-8,0],[8,0]]);break;
+case 'flashlight': rr(-43,-12,72,24,10);rr(27,-8,17,16,5);g.strokeStyle='#9bd3bf';line([[-17,-12],[-17,12]]);line([[6,-12],[6,12]]);break;
+case 'toycar': path([[-39,8],[-24,-10],[4,-18],[24,-10],[39,8],[35,22],[-35,22]]);strokeFill();ellipse(-20,22,9,9);ellipse(20,22,9,9);break;
+case 'binoculars': ellipse(-17,0,22,18);ellipse(17,0,22,18);rr(-9,-10,18,20,4);g.strokeStyle='#9bd3bf';line([[0,-28],[0,-8]]);break;
+case 'toothbrush': rr(-41,-6,67,12,5);ellipse(31,0,11,10);g.strokeStyle='#9bd3bf';for(let i=24;i<37;i+=4)line([[i,-8],[i,-17]]);break;
+}
+drawMaterialOverlay(Math.min(88,it.w/1.05),Math.min(88,it.h/1.05));g.restore()}
+function bagHasUnfoundDrug(b){return b.items.some(it=>it.cat==='drug'&&!it.found)}
+function drawBag(b){g.save();g.translate(b.x,b.y);let shellGlow=b.shellStyle==='hard'?'rgba(160,240,255,.22)':b.shellStyle==='soft'?'rgba(130,220,255,.20)':'rgba(245,210,140,.18)';g.shadowColor=shellGlow;g.shadowBlur=20;g.fillStyle='rgba(128,208,255,.08)';g.strokeStyle='#aee7ff';g.lineWidth=5.2;
+const clipShell=()=>{g.beginPath();if(b.shellStyle==='duffel'){g.moveTo(-b.w*.48,-b.h*.18);g.lineTo(-b.w*.32,-b.h*.44);g.lineTo(b.w*.32,-b.h*.44);g.lineTo(b.w*.48,-b.h*.18);g.lineTo(b.w*.43,b.h*.33);g.lineTo(-b.w*.43,b.h*.33);g.closePath();}else if(b.shellStyle==='soft'){g.roundRect(-b.w/2,-b.h/2,b.w,b.h,26);}else{g.roundRect(-b.w/2,-b.h/2,b.w,b.h,17);}};
+if(b.shellStyle==='duffel'){
+  path([[-b.w*.48,-b.h*.18],[-b.w*.32,-b.h*.44],[b.w*.32,-b.h*.44],[b.w*.48,-b.h*.18],[b.w*.43,b.h*.33],[-b.w*.43,b.h*.33]]);strokeFill();
+  g.shadowBlur=0;g.lineWidth=3;g.strokeStyle='#85d2e9';
+  g.beginPath();g.arc(-b.w*.12,-b.h*.42,b.w*.12,Math.PI,0);g.stroke();g.beginPath();g.arc(b.w*.12,-b.h*.42,b.w*.12,Math.PI,0);g.stroke();
+  for(let i=0;i<3;i++){g.fillStyle='rgba(209,244,255,.12)';g.fillRect(-b.w*.28+i*(b.w*.56)/2,-b.h*.08,8,b.h*.25)}
+}else if(b.shellStyle==='soft'){
+  g.beginPath();g.roundRect(-b.w/2,-b.h/2,b.w,b.h,26);strokeFill();
+  g.shadowBlur=0;g.lineWidth=2;g.strokeStyle='rgba(220,247,255,.5)';g.beginPath();g.roundRect(-b.w/2+12,-b.h/2+12,b.w-24,b.h-24,19);g.stroke();
+  g.strokeStyle='#88d9ef';g.lineWidth=4;g.beginPath();g.roundRect(-b.w*.22,-b.h/2-11,b.w*.44,16,7);g.stroke();
+  g.strokeStyle='rgba(197,240,255,.5)';line([[-b.w*.35,0],[b.w*.35,0]]);line([[-b.w*.35,12],[b.w*.35,12]]);
+}else{
+  g.beginPath();g.roundRect(-b.w/2,-b.h/2,b.w,b.h,17);g.stroke();g.fill();
+  g.shadowBlur=0;g.lineWidth=2;g.strokeStyle='rgba(220,247,255,.55)';g.beginPath();g.roundRect(-b.w/2+9,-b.h/2+9,b.w-18,b.h-18,12);g.stroke();
+  g.strokeStyle='#88d9ef';g.lineWidth=4;g.beginPath();g.roundRect(-b.w*.25,-b.h/2-12,b.w*.5,18,3);g.stroke();
+  for(let i=0;i<4;i++){g.fillStyle='rgba(209,244,255,.13)';g.fillRect(-b.w/2+20+i*(b.w-40)/4,-b.h/2+14,9,b.h-28)}
+}
+// clip items strictly inside the carrier shell so nothing visually protrudes
+g.save();clipShell();g.clip();
+for(let it of b.items)itemDraw(it,it.dx,it.dy);
+let shellGrad=g.createLinearGradient(-b.w/2,-b.h/2,b.w/2,b.h/2);shellGrad.addColorStop(0,'rgba(98,200,255,.04)');shellGrad.addColorStop(.45,'rgba(234,246,255,.09)');shellGrad.addColorStop(1,'rgba(75,169,225,.16)');g.fillStyle=shellGrad;g.fillRect(-b.w/2-8,-b.h/2-8,b.w+16,b.h+16);
+g.globalCompositeOperation='screen';for(let yy=-b.h/2+8;yy<b.h/2;yy+=8){g.fillStyle='rgba(201,244,255,.045)';g.fillRect(-b.w/2,yy,b.w,1.6);}g.fillStyle='rgba(255,255,255,.06)';g.beginPath();g.moveTo(-b.w*.46,-b.h*.16);g.lineTo(-b.w*.05,-b.h*.44);g.lineTo(b.w*.2,-b.h*.44);g.lineTo(-b.w*.22,b.h*.34);g.lineTo(-b.w*.4,b.h*.34);g.closePath();g.fill();
+g.fillStyle='rgba(155,240,255,.05)';g.beginPath();g.ellipse(0,0,b.w*.33,b.h*.15,0,0,Math.PI*2);g.fill();
+g.restore();
+if(b.alertFlash>0&&bagHasUnfoundDrug(b)){let a=.45+.45*Math.sin(elapsed*10);g.strokeStyle='rgba(255,84,84,'+a.toFixed(3)+')';g.lineWidth=5;if(b.shellStyle==='duffel'){path([[-b.w*.5,-b.h*.2],[-b.w*.34,-b.h*.46],[b.w*.34,-b.h*.46],[b.w*.5,-b.h*.2],[b.w*.44,b.h*.35],[-b.w*.44,b.h*.35]]);g.stroke();}else{g.beginPath();g.roundRect(-b.w/2-5,-b.h/2-5,b.w+10,b.h+10,20);g.stroke();}g.fillStyle='rgba(255,230,117,'+a.toFixed(3)+')';g.beginPath();g.roundRect(-42,-b.h/2-38,84,26,9);g.fill();g.fillStyle='#8b2b22';g.font='900 15px system-ui';g.textAlign='center';g.fillText('탐지견 반응!',0,-b.h/2-19);g.textAlign='left';}
+g.restore()}
+function paw(x,y,scale=1){g.save();g.translate(x,y);g.scale(scale,scale);g.fillStyle='#ffe3a0';g.strokeStyle='#a85b4d';g.lineWidth=2;for(let [a,b] of [[-16,-15],[-5,-24],[8,-23],[20,-12]]){g.beginPath();g.ellipse(a,b,6,8,-.2,0,7);strokeFill()}g.beginPath();g.moveTo(-24,12);g.bezierCurveTo(-23,-5,-11,-10,0,-4);g.bezierCurveTo(12,-12,24,-1,25,13);g.bezierCurveTo(20,27,-19,27,-24,12);strokeFill();g.restore()}
+function effect(x,y,label,good=true,kind='paw'){fx.push({x,y,label,good,kind,life:.9,max:.9})}
+function drawFx(){for(let f of fx){let a=Math.max(0,f.life/f.max);g.save();g.globalAlpha=a;g.translate(f.x,f.y-(1-a)*46);if(f.kind==='paw')paw(0,0,1.15);g.textAlign='center';g.fillStyle=f.good?'#ffe7a0':'#ff919b';g.shadowColor='#07253d';g.shadowBlur=7;g.font='900 26px system-ui';g.fillText(f.label,0,f.kind==='paw'?53:0);g.restore()}}
+function background(){let gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#061726');gr.addColorStop(.44,'#103d58');gr.addColorStop(.77,'#0a2740');gr.addColorStop(1,'#101c18');g.fillStyle=gr;g.fillRect(0,0,W,H);g.fillStyle='#1c495d';g.fillRect(0,108,W,302);g.fillStyle='#113651';g.fillRect(0,126,W,265);
+let sweep=(elapsed*175)%(W+220)-110;let beam=g.createLinearGradient(sweep-85,0,sweep+85,0);beam.addColorStop(0,'rgba(120,240,255,0)');beam.addColorStop(.5,'rgba(160,247,255,.14)');beam.addColorStop(1,'rgba(120,240,255,0)');g.fillStyle=beam;g.fillRect(0,126,W,265);
+let sweep2=(elapsed*110+W*0.45)%(W+260)-130;let beam2=g.createLinearGradient(sweep2-60,0,sweep2+60,0);beam2.addColorStop(0,'rgba(255,215,130,0)');beam2.addColorStop(.5,'rgba(255,230,165,.08)');beam2.addColorStop(1,'rgba(255,215,130,0)');g.fillStyle=beam2;g.fillRect(0,126,W,265);
+let shift=elapsed*beltSpeed()*.55%65;g.strokeStyle='rgba(103,190,216,.45)';g.lineWidth=1.4;for(let x=-shift;x<W;x+=65){g.beginPath();g.moveTo(x,125);g.lineTo(x,393);g.stroke()}for(let y=155;y<392;y+=47){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}g.fillStyle='#8ad6ea';g.fillRect(0,115,W,9);g.fillRect(0,394,W,10);
+let noiseShift=(elapsed*48)%18;for(let y=126-noiseShift;y<391;y+=6){g.fillStyle='rgba(176,244,255,.032)';g.fillRect(0,y,W,1)}for(let y=132-noiseShift*.3;y<388;y+=17){g.fillStyle='rgba(255,255,255,.015)';g.fillRect(0,y,W,.8)}
+let gr2=g.createLinearGradient(0,418,0,H);gr2.addColorStop(0,'#15241f');gr2.addColorStop(.52,'#253729');gr2.addColorStop(1,'#111913');g.fillStyle=gr2;g.fillRect(0,418,W,172);g.fillStyle='#2b4331';g.fillRect(0,423,W,5);let laneShift=(elapsed*72*.25)%92;g.strokeStyle='#425545';g.lineWidth=2;for(let x=-laneShift;x<W+92;x+=92){g.beginPath();g.moveTo(x,430);g.lineTo(x+35,585);g.stroke()}g.fillStyle='#68806b';g.fillRect(0,584,W,4);
+let hudGlow=g.createLinearGradient(0,0,W,0);hudGlow.addColorStop(0,'rgba(150,235,255,.12)');hudGlow.addColorStop(.4,'rgba(255,215,125,.08)');hudGlow.addColorStop(1,'rgba(150,235,255,.12)');g.fillStyle=hudGlow;g.fillRect(14,14,W-28,58);
+g.fillStyle='#d8f6ff';g.textAlign='left';g.font='bold 16px system-ui';g.fillText('MATA X-RAY · SCANNER 06',23,32);g.fillStyle='#ffcf78';g.font='bold 14px system-ui';g.fillText('◀ BELT MOVING    SPEED ×'+factor().toFixed(1)+(combo>=3?'   ⚡ COMBO BOOST!':''),23,60);g.fillStyle='#d4f1d0';g.fillText('🐕 RETRIEVER PATROL  '+(dog.mode==='alert'?'DRUG ALERT!':'SNIFFING...'),23,440);g.textAlign='right';g.fillStyle='#b8dce3';g.font='13px system-ui';g.fillText('SIMULATED DUAL-ENERGY PALETTE',W-23,32);g.textAlign='left';
+g.fillStyle='rgba(117,200,255,.7)';g.fillRect(W-198,45,42,7);g.fillStyle='rgba(255,191,80,.7)';g.fillRect(W-148,45,42,7);g.fillStyle='rgba(145,214,183,.7)';g.fillRect(W-98,45,42,7);g.fillStyle='#d1ecf5';g.font='11px system-ui';g.fillText('금속',W-198,67);g.fillText('유기물',W-148,67);g.fillText('일반',W-98,67);
+for(let y=0;y<H;y+=5){g.fillStyle='rgba(170,239,242,.02)';g.fillRect(0,y,W,1)}
+let vign=g.createLinearGradient(0,0,0,120);vign.addColorStop(0,'rgba(0,0,0,.22)');vign.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=vign;g.fillRect(0,0,W,120);g.fillStyle='rgba(0,0,0,.12)';g.fillRect(0,0,W,8);g.fillRect(0,H-8,W,8);g.fillStyle='rgba(0,0,0,.08)';g.fillRect(0,108,12,302);g.fillRect(W-12,108,12,302)}
+function drawRetriever(){
+g.save();
+g.translate(dog.x,dog.y);
+if(dog.dir<0)g.scale(-1,1);
+let scale=(dog.mode==='alert'?0.481:0.465);
+let w=dogSprite.width*scale,h=dogSprite.height*scale;
+let scanTurn=(dog.mode==='alert'?Math.sin(elapsed*14)*0.02:Math.sin(dog.lookPhase)*0.05);
+let sniffDip=(dog.mode==='alert'?Math.abs(Math.sin(elapsed*12))*1.2:Math.abs(Math.sin(dog.sniffPhase))*3.0);
+let bob=(dog.mode==='alert'?Math.sin(elapsed*18)*1.3:Math.sin(dog.step)*0.9);
+let x=-w/2,y=-h+18+bob+sniffDip;
+dogDraw.x=dog.x+x; dogDraw.y=dog.y+y; dogDraw.w=w; dogDraw.h=h; dogDraw.scale=scale;
+g.fillStyle='rgba(0,0,0,.28)';
+g.beginPath();g.ellipse(0,24,w*0.22,h*0.025,0,0,Math.PI*2);g.fill();
+if(dogSprite.complete && dogSprite.naturalWidth){
+  g.save();
+  if(scanTurn!==0) g.rotate(scanTurn);
+  g.drawImage(dogSprite,x,y,w,h);
+  g.restore();
+  // subtle nose-targeting motion while patrolling: tiny overlay nudge of the head area
+  if(dog.mode!=='alert'){
+    g.save();
+    g.beginPath();g.rect(x+w*0.52,y,w*0.28,h*0.18);g.clip();
+    g.translate(Math.sin(dog.lookPhase)*2.3, Math.abs(Math.sin(dog.sniffPhase))*1.8);
+    g.drawImage(dogSprite,x,y,w,h);
+    g.restore();
+  }
+}else{
+  g.fillStyle='#111'; g.beginPath(); g.ellipse(0,-40,40,65,0,0,Math.PI*2); g.fill();
+}
+if(dog.mode==='alert'&&dog.barkClock>0){
+  g.globalAlpha=Math.min(1,dog.barkClock/.55);
+  g.fillStyle='#fff1af';g.strokeStyle='#67531d';g.lineWidth=3;
+  g.beginPath();g.roundRect(66,-h+42,84,36,12);strokeFill();
+  g.fillStyle='#553c12';g.font='900 20px system-ui';g.fillText('멍!',84,-h+66);
+}
+g.restore()}
+function draw(){background();for(let b of bags)drawBag(b);drawRetriever();drawFx();if(!running||paused){g.fillStyle='#061a2bc9';g.fillRect(0,0,W,H);g.textAlign='center';g.fillStyle='#fff0bd';g.font='900 41px system-ui';g.fillText(paused?'⏸ 일시정지':remain<=0?'🐾 검사 완료!':'🐾 마타의 탐지 대작전',W/2,248);g.fillStyle='#eaf8ff';g.font='22px system-ui';g.fillText(paused?'계속하기 버튼으로 재개':remain<=0?`최종 ${score}점 · 적발 ${hits}건`:'45초 동안 의심물품을 찾아봐!',W/2,300);g.font='18px system-ui';g.fillStyle='#d6f3df';g.fillText('리트리버는 마약 의심 캐리어 앞에서만 컹컹 경고해!',W/2,336);g.textAlign='left'}}
+function pointHitsDog(px,py){ return false }
+function visibleDrugTarget(){let candidates=bags.filter(b=>bagHasUnfoundDrug(b)&&b.x+b.w/2>0&&b.x-b.w/2<W);if(!candidates.length)return null;candidates.sort((a,b)=>Math.abs(a.x-dog.x)-Math.abs(b.x-dog.x));return candidates[0]}
+function updateDog(dt){
+dog.step+=dt*(dog.mode==='alert'?2.4:3.4);
+dog.lookPhase+=dt*(dog.mode==='alert'?2.8:2.1);
+dog.sniffPhase+=dt*(dog.mode==='alert'?7.0:5.6);
+dog.barkClock=Math.max(0,dog.barkClock-dt);
+dog.barkCooldown=Math.max(0,dog.barkCooldown-dt);
+dog.pantCooldown=Math.max(0,dog.pantCooldown-dt);
+for(let b of bags)b.alertFlash=Math.max(0,b.alertFlash-dt);
+let target=visibleDrugTarget();
+if(target){
+  dog.targetBagId=target.id;
+  dog.targetX=clamp(target.x,dog.patrolMin,dog.patrolMax);
+  if(Math.abs(dog.x-dog.targetX)>10){
+    dog.mode='track';
+    dog.dir=dog.targetX>dog.x?1:-1;
+    dog.x+=dog.dir*118*dt;
+    if(dog.pantCooldown<=0){playFile(pantAudio);dog.pantCooldown=2.9}
+  }else{
+    dog.mode='alert';
+    dog.x=dog.targetX;
+    dog.dir=target.x>=dog.x?1:-1;
+    target.alertFlash=.22;
+    if(dog.lastAnnouncedBagId!==target.id){
+      say('탐지견 반응!', '리트리버가 마약 의심 캐리어를 알려주고 있어!', '강아지가 짖는 캐리어 안에 마약 의심 물질이 있을 수 있어. 마약류를 우선 확인해봐!', 'search');
+      dog.lastAnnouncedBagId=target.id;
+      playFile(barkAudio);
+      dog.barkClock=.55;
+      target.alertFlash=.82;
+    }
+  }
+}else{
+  dog.targetBagId=null;
+  dog.mode='patrol';
+  dog.x+=dog.dir*92*dt;
+  if(dog.x>dog.patrolMax){dog.x=dog.patrolMax;dog.dir=-1}else if(dog.x<dog.patrolMin){dog.x=dog.patrolMin;dog.dir=1}
+  if(dog.pantCooldown<=0){playFile(pantAudio);dog.pantCooldown=3.2}
+}
+}
+function finish(){running=false;paused=false;remain=0;pantAudio.pause();if(score>best){best=score;try{localStorage.setItem('mata_xray_best_v06',String(best))}catch(e){}$('best').textContent=best;say('신기록 달성!', '마타와 탐지견의 호흡이 최고였어!', '최고기록을 경신했어. 다시 도전해서 더 높은 점수를 노려보자!', 'love')}else say('검사 완료!', '수고했어! 오늘의 검사를 마쳤어.', `최종 ${score}점 · 적발 ${hits}건`, 'success');$('start').textContent='↻ 처음부터';updateHud();draw()}
+function frame(t){if(!running||paused)return;let dt=Math.min(.05,(t-last)/1000);last=t;remain-=dt;elapsed+=dt;spawn-=dt;mataPoseClock-=dt;if(mataPoseClock<0&&mataState!=='inspect'){ $('heroMata').src='assets/inspect.png'; mataState='inspect'; }
+if(spawn<=0){bags.push(bagFactory());spawn=rand(1.65,2.1)/Math.sqrt(factor())}let v=beltSpeed();for(let b of bags){b.x-=v*dt;if(b.x+b.w/2<0&&!b.done){b.done=true;let missed=b.items.filter(it=>it.cat!=='normal'&&!it.found).length;if(missed){score-=40*missed;combo=0;say('앗, 놓쳤어!', '의심물품을 그냥 보내버렸어!', `미적발 ${missed}개 · -${40*missed}점`, 'sad');beep(210,.15,'triangle')}}}bags=bags.filter(b=>b.x+b.w/2>-24);updateDog(dt);for(let f of fx)f.life-=dt;fx=fx.filter(f=>f.life>0);updateHud();if(remain<=0){finish();return}draw();raf=requestAnimationFrame(frame)}
+function itemHit(it,px,py){let dx=px-it.dx,dy=py-it.dy,c=Math.cos(-it.angle),s=Math.sin(-it.angle),xx=dx*c-dy*s,yy=dx*s+dy*c;let rx=it.w*.54,ry=it.h*.55;return (xx*xx)/(rx*rx)+(yy*yy)/(ry*ry)<=1}
+C.addEventListener('pointerdown',e=>{if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found)continue;if(itemHit(it,x-b.x,y-b.y)){let priority=(it.cat==='normal'?0:1000)+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;effect(x,y,'-30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');beep(210,.17,'sawtooth')}else{combo++;let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,y,'+'+pts);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'마약 의심 물질 발견!', combo>=3?'마타와 탐지견의 합동 적발이야!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '마타가 발바닥 도장을 찍었어!', `+${pts}점 · 계속 찾아보자!`, 'success')}beep(650+Math.min(8,combo)*70,.095)}updateHud();draw();});
+$('start').onclick=()=>{cancelAnimationFrame(raf);bags=[];fx=[];running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;counts={weapon:0,drug:0,luxury:0,liquid:0};spawn=.1;last=performance.now();dog.x=150;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='↻ 처음부터';$('pause').textContent='⏸ 일시정지';say('수색 준비 완료!', '마타와 함께 수상한 물품을 찾아보자!', '리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
+$('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';if(paused){pantAudio.pause()}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
+$('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause()}$('sound').textContent=sound?'🔊 효과음 ON':'🔇 효과음 OFF'};
+updateHud();draw();
+</script></body></html>
