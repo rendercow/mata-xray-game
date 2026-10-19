@@ -1,37 +1,33 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.3.4</title><style>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.3.5</title><style>
 :root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#173b53;--sky:#c7e7f7;--panel:#d8edf8;--deep:#0d4971;--cream:#f6f2e8;--accent:#ffbf47}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#e8fbff,#add8eb 55%,#7cb4d1)}main{max-width:1160px;margin:auto;padding:16px}.dashboard{position:relative;background:linear-gradient(180deg,#cde9f7,#b8ddf0);border-radius:26px;border:4px solid #ecf8fe;box-shadow:0 10px 0 #71aecd,0 18px 28px #2d6e8d3a;padding:16px 16px 14px 300px;min-height:285px;overflow:visible}.hero{position:absolute;left:6px;top:-22px;width:290px;pointer-events:auto;user-select:none;touch-action:manipulation;filter:drop-shadow(0 6px 4px #2e678822);z-index:5}.heroMata{display:block;max-width:100%;height:auto}header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{margin:0;color:#0c4d7b;font-size:clamp(23px,3vw,35px);letter-spacing:-1px}.subtitle{color:#44748d;font-size:14px}.pill{background:#fff9;border:2px solid white;padding:9px 14px;border-radius:30px;font-weight:800;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 8px}.stat{background:var(--cream);border:2px solid white;border-radius:16px;text-align:center;padding:10px 5px;box-shadow:0 4px 0 #5a90ab28}.stat small{display:block;color:#6d8c9b;font-size:11px;font-weight:800}.stat strong{display:block;color:#125b84;font-size:24px}.stat.speed strong{color:#e0782d}.brief{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.speechbox{background:#cfe3ef;border:3px solid #effaff;border-radius:18px;min-height:84px;padding:16px 18px 14px 18px;color:#175378;box-shadow:inset 0 1px 0 #ffffffa0}.speechbox .title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}.speechbox .desc{font-weight:800;font-size:15px}.speechbox .sub{margin-top:6px;font-size:12px;color:#4b7084}.controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}button{background:var(--accent);color:#654000;border:0;border-radius:15px;padding:16px 18px;font-weight:900;font-size:15px;box-shadow:0 5px #c68c30;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px #c68c30}.secondary{background:white;color:#245a76;box-shadow:0 5px #b2ccd9}.stageWrap{margin-top:16px;border:8px solid #f7fcff;border-radius:20px;overflow:hidden;background:#122a3b;box-shadow:0 11px 0 #498eaa,0 17px 28px #0c446244}canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}.help{background:#ffffffc7;padding:13px 16px;border-radius:14px;margin-top:14px;font-size:13px;line-height:1.75;color:#355e73}.records{margin-top:8px;color:#456d82;font-size:12px}.tag{display:inline-block;background:#e8f8fe;padding:2px 7px;border-radius:6px;font-weight:800;color:#195c7c}@media(max-width:900px){.dashboard{padding-left:225px;min-height:255px}.hero{width:210px;top:-2px}.speechbox .title{font-size:23px}}@media(max-width:720px){main{padding:8px}.dashboard{padding:152px 10px 12px 10px;min-height:auto}.hero{width:175px;left:50%;transform:translateX(-50%);top:-6px}.hud{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:7px 2px}.stat strong{font-size:17px}.stat small{font-size:9px}.brief{grid-template-columns:1fr}.speechbox{min-height:70px}.speechbox .title{font-size:20px}.stageWrap{border-width:4px}button{padding:12px 13px;font-size:14px}}
-/* v1.3.4 mobile landscape game layout */
-.mobileHUD,.mobileControls,.rotateNotice{display:none}
-html.mobile-root{height:100%;overflow:hidden;overscroll-behavior:none}
-body.mobile-mode{height:100dvh;max-height:100dvh;overflow:hidden;overscroll-behavior:none;background:#071e32;touch-action:manipulation}
-body.mobile-mode main{width:100%;max-width:none;padding:0;margin:0;height:100dvh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+/* v1.3.5 iPhone Safari viewport-safe layout */
+.mobileHUD,.mobileControls,.rotateNotice,.mobileTip{display:none}
+html.mobile-root,html.mobile-root body{height:100%;overflow:hidden;overscroll-behavior:none}
+body.mobile-mode{background:#071e32;position:fixed;inset:0;width:100%;height:100%;overflow:hidden;touch-action:manipulation}
+body.mobile-mode main{position:fixed;top:var(--vp-top,0px);left:var(--vp-left,0px);width:var(--vp-width,100%);height:var(--vp-height,100dvh);max-width:none;padding:0!important;margin:0!important;overflow:hidden;display:block}
 body.mobile-mode .dashboard,body.mobile-mode .help,body.mobile-mode .records{display:none!important}
-body.mobile-mode .mobileShell{height:100%;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;overflow:hidden;min-height:0}
-body.mobile-mode .mobileHUD{display:flex;flex-shrink:0;width:100%;height:42px;min-height:42px;align-items:center;justify-content:space-between;gap:8px;padding:3px max(12px,env(safe-area-inset-right)) 3px max(12px,env(safe-area-inset-left));background:#bfe5f6;color:#124666;font-weight:900;font-size:clamp(11px,2vw,16px)}
-body.mobile-mode .mobileHUD .mobileBrand{max-width:38%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-body.mobile-mode .mobileHUD .mobileStats{display:flex;gap:clamp(8px,2.4vw,24px);align-items:center;justify-content:flex-end;white-space:nowrap;font-variant-numeric:tabular-nums}
-body.mobile-mode .mobileHUD .mobileStats strong{color:#083e65;font-size:clamp(14px,2.8vw,23px)}
-body.mobile-mode .stageWrap{box-sizing:border-box;flex:none;margin:0;padding:0;border:3px solid #c7eafa;border-radius:10px;box-shadow:none;overflow:hidden;position:relative;width:100%;max-width:100%;aspect-ratio:1120/590;min-height:0}
-body.mobile-mode canvas{width:100%;height:100%;display:block;touch-action:none}
-body.mobile-mode .mobileControls{display:flex;flex-shrink:0;align-items:center;justify-content:center;gap:clamp(6px,1.5vw,15px);height:49px;min-height:49px;width:100%;padding:4px max(8px,env(safe-area-inset-right)) 4px max(8px,env(safe-area-inset-left));background:#a8d5ea}
-body.mobile-mode .mobileControls button{box-shadow:none;border-radius:10px;height:39px;min-height:39px;min-width:0;max-width:190px;padding:0 clamp(10px,3.6vw,28px);font-size:clamp(12px,2vw,16px);white-space:nowrap;touch-action:manipulation}
+body.mobile-mode .mobileShell{display:grid;grid-template-rows:var(--hud-height,34px) minmax(0,1fr) var(--control-height,46px);height:100%;width:100%;overflow:hidden;min-height:0;align-items:center;justify-items:center;background:#081f33}
+body.mobile-mode .mobileHUD{display:flex;box-sizing:border-box;width:100%;height:100%;min-width:0;align-items:center;justify-content:space-between;gap:7px;padding:2px max(10px,env(safe-area-inset-right)) 2px max(10px,env(safe-area-inset-left));background:#bfe5f6;color:#124666;font-weight:800;font-size:clamp(10px,1.5vw,14px);white-space:nowrap;overflow:hidden}
+body.mobile-mode .mobileHUD .mobileBrand{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:0 1 auto}
+body.mobile-mode .mobileHUD .mobileStats{display:flex;gap:clamp(7px,2vw,18px);align-items:center;flex:0 0 auto;font-variant-numeric:tabular-nums}
+body.mobile-mode .mobileHUD .mobileStats strong{color:#083e65;font-size:clamp(12px,2vw,19px)}
+body.mobile-mode .stageWrap{box-sizing:border-box;grid-row:2;margin:0!important;padding:0!important;border:2px solid #c7eafa;border-radius:8px;box-shadow:none!important;overflow:hidden;position:relative;width:var(--stage-width,100%);height:var(--stage-height,100%);max-width:100%;max-height:100%;min-width:0;min-height:0;aspect-ratio:auto!important;align-self:center;justify-self:center}
+body.mobile-mode canvas{width:100%!important;height:100%!important;display:block;touch-action:none}
+body.mobile-mode .mobileControls{display:flex;box-sizing:border-box;width:100%;height:100%;align-items:center;justify-content:center;gap:clamp(4px,1.3vw,12px);padding:3px max(8px,env(safe-area-inset-right)) 3px max(8px,env(safe-area-inset-left));background:#a8d5ea;overflow:hidden}
+body.mobile-mode .mobileControls button{flex:1 1 0;box-shadow:none;border-radius:9px;height:100%;max-height:39px;min-height:0;min-width:0;max-width:190px;padding:0 3px;font-size:clamp(11px,1.8vw,16px);white-space:nowrap;touch-action:manipulation}
 body.mobile-mode .mobileControls button.secondary{background:#fff;color:#154c6b}
 body.mobile-mode .mobileControls .fullBtn{background:#d9effa;color:#154c6b}
-body.mobile-mode .rotateNotice{display:none}
-@media (orientation:portrait){
- body.mobile-mode .rotateNotice{display:flex;position:fixed;inset:0;z-index:1000;background:linear-gradient(140deg,#0d4165,#08253d);color:white;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:30px;}
- body.mobile-mode .rotateNotice .rotateIcon{font-size:64px;line-height:1.2}
- body.mobile-mode .rotateNotice h2{margin:0;font-size:24px}
- body.mobile-mode .rotateNotice p{margin:0;line-height:1.7;font-size:15px}
- body.mobile-mode .rotateNotice button{box-shadow:none}
-}
-@media (orientation:landscape) and (max-height:430px){
- body.mobile-mode .mobileHUD{height:36px;min-height:36px;font-size:12px}
- body.mobile-mode .mobileControls{height:43px;min-height:43px}
- body.mobile-mode .mobileControls button{height:34px;min-height:34px}
- body.mobile-mode .stageWrap{width:100%}
-}
-</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.3.4</small></h1><div class="subtitle">CUSTOMS MATA · PC 안정성 유지 · 모바일 전체화면 UI</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점</div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.3.4</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 전체화면으로 시작</button></div><div class="help">🎯 <b>플레이:</b> 오른쪽에서 왼쪽으로 움직이는 가방 속 <b>의심물품을 정확히 클릭</b>하세요. 총·도검 +100 · 마약 의심 +150 · 명품 +70 · 액체류 +50점. <b>일반물품 클릭 -30점 / 의심물품 놓침 -40점 / 빈 곳 클릭 0점.</b> <b>검은 리트리버 탐지견은 마약 의심 물질이 든 캐리어 앞에서만 멈춰 컹컹 알려줍니다.</b> 순찰 중에는 업로드한 헥헥 사운드, 경보 시에는 업로드한 멍멍 사운드가 재생됩니다. 마타를 클릭해도 게임은 계속 진행되며, 탐지견과 수하물 판독 기능은 이전 버전 그대로 유지됩니다. <span class="tag">45초 속도전</span><br>※ 오락용 가상 X-ray 영상입니다. 명품·액체류 등은 게임상의 확인 대상이며 실제 위법성이나 마약 여부를 X-ray 영상만으로 확정할 수 없습니다.</div><div class="records" id="records"></div></main><script>
+body.mobile-mode .rotateNotice{display:none;position:fixed;inset:0;z-index:1000;background:linear-gradient(140deg,#0d4165,#08253d);color:white;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
+body.mobile-mode .rotateNotice .rotateIcon{font-size:50px;line-height:1.15}
+body.mobile-mode .rotateNotice h2{margin:0;font-size:clamp(19px,5vw,25px)}
+body.mobile-mode .rotateNotice p{margin:0;line-height:1.6;font-size:clamp(12px,3.3vw,15px)}
+body.mobile-mode .rotateNotice button{box-shadow:none}
+body.mobile-mode.portrait-notice .rotateNotice{display:flex}
+body.mobile-mode .mobileTip{display:none;position:fixed;z-index:1300;left:50%;bottom:calc(52px + env(safe-area-inset-bottom));transform:translateX(-50%);background:#fff7d9;color:#173b53;border-radius:13px;padding:10px 15px;box-shadow:0 4px 12px #0005;font-size:13px;max-width:min(90vw,420px);text-align:center;pointer-events:none}
+body.mobile-mode .mobileTip.show{display:block}
+body.mobile-mode.portrait-play .mobileShell{grid-template-rows:40px minmax(0,1fr) 54px}
+@media(orientation:portrait){body.mobile-mode .mobileHUD{font-size:11px}body.mobile-mode .mobileControls button{font-size:12px}}
+</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.3.5</small></h1><div class="subtitle">CUSTOMS MATA · PC 안정성 유지 · 모바일 전체화면 UI</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점</div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.3.5</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 가로화면으로 진행</button><button class="secondary" id="portraitPlay">세로로도 테스트</button></div><div class="mobileTip" id="mobileTip" role="status" aria-live="polite"></div><div class="help">🎯 <b>플레이:</b> 오른쪽에서 왼쪽으로 움직이는 가방 속 <b>의심물품을 정확히 클릭</b>하세요. 총·도검 +100 · 마약 의심 +150 · 명품 +70 · 액체류 +50점. <b>일반물품 클릭 -30점 / 의심물품 놓침 -40점 / 빈 곳 클릭 0점.</b> <b>검은 리트리버 탐지견은 마약 의심 물질이 든 캐리어 앞에서만 멈춰 컹컹 알려줍니다.</b> 순찰 중에는 업로드한 헥헥 사운드, 경보 시에는 업로드한 멍멍 사운드가 재생됩니다. 마타를 클릭해도 게임은 계속 진행되며, 탐지견과 수하물 판독 기능은 이전 버전 그대로 유지됩니다. <span class="tag">45초 속도전</span><br>※ 오락용 가상 X-ray 영상입니다. 명품·액체류 등은 게임상의 확인 대상이며 실제 위법성이나 마약 여부를 X-ray 영상만으로 확정할 수 없습니다.</div><div class="records" id="records"></div></main><script>
 'use strict';
 const C=document.querySelector('#game'),g=C.getContext('2d'),$=id=>document.getElementById(id),W=C.width,H=C.height;
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
@@ -67,50 +63,68 @@ function factor(){return clamp(1+Math.max(0,combo-1)*.13+elapsed*.007,1,2.45)}
 function beltSpeed(){return 143*factor()}
 
 const mobileMode=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || (navigator.maxTouchPoints>1 && Math.min(screen.width,screen.height)<900);
-if(mobileMode){document.body.classList.add('mobile-mode');document.documentElement.classList.add('mobile-root');}
+let portraitPlay=false, mobileTipTimer=null;
+if(mobileMode){document.body.classList.add('mobile-mode');document.documentElement.classList.add('mobile-root')}
+function isPortrait(){return window.innerHeight>window.innerWidth}
+function mobileMessage(msg){if(!mobileMode)return;const tip=$('mobileTip');if(!tip)return;tip.textContent=msg;tip.classList.add('show');clearTimeout(mobileTipTimer);mobileTipTimer=setTimeout(()=>tip.classList.remove('show'),3200)}
+function mobilePauseForRotation(){if(!running||paused)return;paused=true;cancelAnimationFrame(raf);pantAudio.pause();barkAudio.pause();$('pause').textContent='▶ 계속하기';safeRender('rotation pause',()=>draw());}
 function fitMobileStage(){
  if(!mobileMode)return;
- const hud=document.querySelector('.mobileHUD'),nav=document.querySelector('.mobileControls'),stage=document.querySelector('.stageWrap');
- const vh=window.visualViewport?.height || window.innerHeight;
- const vw=window.visualViewport?.width || window.innerWidth;
- const usable=Math.max(1,vh-hud.offsetHeight-nav.offsetHeight-3);
- const stageW=Math.max(1,Math.min(vw,usable*(1120/590)));
- stage.style.width=stageW+'px';stage.style.height=(stageW*590/1120)+'px';
+ const vp=window.visualViewport;
+ const width=vp?.width||window.innerWidth,height=vp?.height||window.innerHeight;
+ const root=document.body;
+ // Safari address bar and toolbars are excluded from visualViewport.
+ root.style.setProperty('--vp-width',width+'px');root.style.setProperty('--vp-height',height+'px');
+ root.style.setProperty('--vp-top',(vp?.offsetTop||0)+'px');root.style.setProperty('--vp-left',(vp?.offsetLeft||0)+'px');
+ const landscape=width>height;
+ const hudHeight=landscape?(height<380?28:34):40;
+ const buttonHeight=landscape?(height<380?43:46):54;
+ root.style.setProperty('--hud-height',hudHeight+'px');root.style.setProperty('--control-height',buttonHeight+'px');
+ const availableHeight=Math.max(1,height-hudHeight-buttonHeight);
+ // Force both CSS dimensions; never allow aspect-ratio to push stage under Safari chrome.
+ const stageWidth=Math.max(1,Math.min(width-4,availableHeight*1120/590));
+ root.style.setProperty('--stage-width',stageWidth+'px');
+ root.style.setProperty('--stage-height',(stageWidth*590/1120)+'px');
+ root.classList.toggle('portrait-notice',!landscape&&!portraitPlay);
+ root.classList.toggle('portrait-play',!landscape&&portraitPlay);
 }
-
 function syncMobileUI(){
  if(!mobileMode)return;
- $('mTime').textContent=Math.max(0,Math.ceil(remain));
- $('mScore').textContent=score;
- $('mCombo').textContent=combo;
+ $('mTime').textContent=Math.max(0,Math.ceil(remain));$('mScore').textContent=score;$('mCombo').textContent=combo;
  $('mStart').textContent=running?'↻ 다시 시작':'▶ 게임 시작';
- $('mPause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';
- $('mPause').disabled=!running;
+ $('mPause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';$('mPause').disabled=!running;
  $('mSound').textContent=sound?'🔊 소리 ON':'🔇 소리 OFF';
- $('mFull').textContent=document.fullscreenElement?'⤢ 창모드':'⛶ 전체화면';
+ $('mFull').textContent=document.fullscreenElement?'⤢ 창모드':'⛶ 크게 보기';
 }
 function requestMobileFullscreen(){
  if(!mobileMode)return;
- try{
-   if(!document.fullscreenElement){
-     const promise=document.documentElement.requestFullscreen?.({navigationUI:'hide'});
-     if(promise?.then){promise.then(()=>{try{screen.orientation?.lock?.('landscape')?.catch?.(()=>{});}catch(e){}syncMobileUI();}).catch(()=>{});}
-   }else{try{screen.orientation?.lock?.('landscape')?.catch?.(()=>{});}catch(e){}}
- }catch(e){}
+ if(!document.fullscreenEnabled||!document.documentElement.requestFullscreen){
+  mobileMessage('iPhone Safari에서는 전체화면 전환이 제한돼요. 홈 화면에 추가하면 앱처럼 실행할 수 있어요.');return;
+ }
+ try{const action=document.documentElement.requestFullscreen({navigationUI:'hide'});
+ if(action?.then)action.then(()=>{try{screen.orientation?.lock?.('landscape')?.catch?.(()=>{});}catch(e){}fitMobileStage();syncMobileUI()}).catch(()=>mobileMessage('이 브라우저는 전체화면 전환을 허용하지 않아요.'));}
+ catch(e){mobileMessage('전체화면 전환이 지원되지 않는 브라우저예요.')}
+}
+function handleMobileOrientation(){
+ if(!mobileMode)return;
+ const portrait=isPortrait();
+ if(portrait){portraitPlay=false;mobilePauseForRotation()}
+ fitMobileStage();syncMobileUI();
 }
 if(mobileMode){
- document.getElementById('mStart').addEventListener('click',()=>{requestMobileFullscreen();$('start').click();syncMobileUI()});
- let waitingForLandscape=false;
- document.getElementById('rotateStart').addEventListener('click',()=>{requestMobileFullscreen();waitingForLandscape=true;if(matchMedia('(orientation: landscape)').matches){$('start').click();waitingForLandscape=false;}syncMobileUI()});
- document.getElementById('mPause').addEventListener('click',()=>{$('pause').click();syncMobileUI()});
- document.getElementById('mSound').addEventListener('click',()=>{$('sound').click();syncMobileUI()});
- document.getElementById('mFull').addEventListener('click',()=>{if(document.fullscreenElement){document.exitFullscreen?.().catch?.(()=>{});}else requestMobileFullscreen();syncMobileUI()});
- document.addEventListener('fullscreenchange',()=>{syncMobileUI();fitMobileStage()});
- window.addEventListener('resize',fitMobileStage);
- window.visualViewport?.addEventListener('resize',fitMobileStage);
- window.addEventListener('orientationchange',()=>{syncMobileUI();fitMobileStage();if(waitingForLandscape && matchMedia('(orientation: landscape)').matches){waitingForLandscape=false;$('start').click();}});
- document.addEventListener('DOMContentLoaded',fitMobileStage);
- fitMobileStage();
+ $('mStart').addEventListener('click',()=>{$('start').click();syncMobileUI()});
+ $('rotateStart').addEventListener('click',()=>{portraitPlay=false;fitMobileStage();mobileMessage('화면 회전 잠금을 해제하고 휴대폰을 가로로 돌려주세요.');});
+ $('portraitPlay').addEventListener('click',()=>{portraitPlay=true;fitMobileStage();$('start').click();syncMobileUI();});
+ $('mPause').addEventListener('click',()=>{$('pause').click();syncMobileUI()});
+ $('mSound').addEventListener('click',()=>{$('sound').click();syncMobileUI()});
+ $('mFull').addEventListener('click',()=>{if(document.fullscreenElement){document.exitFullscreen?.().catch?.(()=>{});}else requestMobileFullscreen();syncMobileUI()});
+ document.addEventListener('fullscreenchange',()=>{fitMobileStage();syncMobileUI()});
+ window.addEventListener('resize',handleMobileOrientation);
+ window.addEventListener('orientationchange',handleMobileOrientation);
+ window.visualViewport?.addEventListener('resize',()=>{fitMobileStage()});
+ window.visualViewport?.addEventListener('scroll',()=>fitMobileStage());
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)mobilePauseForRotation()});
+ handleMobileOrientation();
 }
 function updateHud(){const vals={time:Math.max(0,Math.ceil(remain)),score,hits,combo,errors,speed:'×'+factor().toFixed(1)};for(let k in vals)$(k).textContent=vals[k];$('records').textContent=`적발 실적  |  총·도검 ${counts.weapon}   ·   마약 의심 ${counts.drug}   ·   명품 ${counts.luxury}   ·   액체류 ${counts.liquid}`;syncMobileUI()}
 function bagFactory(){
@@ -387,7 +401,7 @@ function frame(t){
 function itemHit(it,px,py){let dx=px-it.dx,dy=py-it.dy,c=Math.cos(-it.angle),s=Math.sin(-it.angle),xx=dx*c-dy*s,yy=dx*s+dy*c;let rx=it.w*.54,ry=it.h*.55;return (xx*xx)/(rx*rx)+(yy*yy)/(ry*ry)<=1}
 C.addEventListener('pointerdown',e=>{if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found)continue;if(itemHit(it,x-b.x,y-b.y)){let priority=(it.cat==='normal'?0:1000)+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;effect(x,y,'-30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');beep(210,.17,'sawtooth')}else{combo++;let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,y,'+'+pts);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'마약 의심 물질 발견!', combo>=3?'마타와 탐지견의 합동 적발이야!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '마타가 발바닥 도장을 찍었어!', `+${pts}점 · 계속 찾아보자!`, 'success')}beep(650+Math.min(8,combo)*70,.095)}updateHud();});
 $('start').onclick=()=>{cancelAnimationFrame(raf);bags=[];fx=[];running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;counts={weapon:0,drug:0,luxury:0,liquid:0};spawn=.1;last=performance.now();dog.x=150;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='↻ 처음부터';$('pause').textContent='⏸ 일시정지';say('수색 준비 완료!', '마타와 함께 수상한 물품을 찾아보자!', '리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
-$('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';if(paused){pantAudio.pause()}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
+$('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';if(paused){pantAudio.pause();barkAudio.pause();cancelAnimationFrame(raf)}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
 $('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause()}$('sound').textContent=sound?'🔊 효과음 ON':'🔇 효과음 OFF'};
 updateHud();draw();
 </script></body></html>
