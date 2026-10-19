@@ -1,6 +1,6 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.4.1</title><style>
-:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#173b53;--sky:#c7e7f7;--panel:#d8edf8;--deep:#0d4971;--cream:#f6f2e8;--accent:#ffbf47}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#e8fbff,#add8eb 55%,#7cb4d1)}main{max-width:1160px;margin:auto;padding:16px}.dashboard{position:relative;background:linear-gradient(180deg,#cde9f7,#b8ddf0);border-radius:26px;border:4px solid #ecf8fe;box-shadow:0 10px 0 #71aecd,0 18px 28px #2d6e8d3a;padding:16px 16px 14px 300px;min-height:285px;overflow:visible}.hero{position:absolute;left:6px;top:-22px;width:290px;pointer-events:auto;user-select:none;touch-action:manipulation;filter:drop-shadow(0 6px 4px #2e678822);z-index:5}.heroMata{display:block;max-width:100%;height:auto}header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{margin:0;color:#0c4d7b;font-size:clamp(23px,3vw,35px);letter-spacing:-1px}.subtitle{color:#44748d;font-size:14px}.pill{background:#fff9;border:2px solid white;padding:9px 14px;border-radius:30px;font-weight:800;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 8px}.stat{background:var(--cream);border:2px solid white;border-radius:16px;text-align:center;padding:10px 5px;box-shadow:0 4px 0 #5a90ab28}.stat small{display:block;color:#6d8c9b;font-size:11px;font-weight:800}.stat strong{display:block;color:#125b84;font-size:24px}.stat.speed strong{color:#e0782d}.brief{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.speechbox{background:#cfe3ef;border:3px solid #effaff;border-radius:18px;min-height:84px;padding:16px 18px 14px 18px;color:#175378;box-shadow:inset 0 1px 0 #ffffffa0}.speechbox .title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}.speechbox .desc{font-weight:800;font-size:15px}.speechbox .sub{margin-top:6px;font-size:12px;color:#4b7084}.controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}button{background:var(--accent);color:#654000;border:0;border-radius:15px;padding:16px 18px;font-weight:900;font-size:15px;box-shadow:0 5px #c68c30;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px #c68c30}.secondary{background:white;color:#245a76;box-shadow:0 5px #b2ccd9}.stageWrap{margin-top:16px;border:8px solid #f7fcff;border-radius:20px;overflow:hidden;background:#122a3b;box-shadow:0 11px 0 #498eaa,0 17px 28px #0c446244}canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}.help{background:#ffffffc7;padding:13px 16px;border-radius:14px;margin-top:14px;font-size:13px;line-height:1.75;color:#355e73}.records{margin-top:8px;color:#456d82;font-size:12px}.tag{display:inline-block;background:#e8f8fe;padding:2px 7px;border-radius:6px;font-weight:800;color:#195c7c}@media(max-width:900px){.dashboard{padding-left:225px;min-height:255px}.hero{width:210px;top:-2px}.speechbox .title{font-size:23px}}@media(max-width:720px){main{padding:8px}.dashboard{padding:152px 10px 12px 10px;min-height:auto}.hero{width:175px;left:50%;transform:translateX(-50%);top:-6px}.hud{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:7px 2px}.stat strong{font-size:17px}.stat small{font-size:9px}.brief{grid-template-columns:1fr}.speechbox{min-height:70px}.speechbox .title{font-size:20px}.stageWrap{border-width:4px}button{padding:12px 13px;font-size:14px}}
-/* v1.4.1 iPhone Safari viewport-safe layout */
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.4.8</title><style>
+:root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#173b53;--sky:#c7e7f7;--panel:#d8edf8;--deep:#0d4971;--cream:#f6f2e8;--accent:#ffbf47}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#e8fbff,#add8eb 55%,#7cb4d1)}main{max-width:1160px;margin:auto;padding:16px}.dashboard{position:relative;background:linear-gradient(180deg,#cde9f7,#b8ddf0);border-radius:26px;border:4px solid #ecf8fe;box-shadow:0 10px 0 #71aecd,0 18px 28px #2d6e8d3a;padding:16px 16px 14px 300px;min-height:285px;overflow:visible}.hero{position:absolute;left:6px;top:-22px;width:290px;pointer-events:auto;user-select:none;touch-action:manipulation;filter:none;z-index:5}.heroMata{display:block;max-width:100%;height:auto}header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{margin:0;color:#0c4d7b;font-size:clamp(23px,3vw,35px);letter-spacing:-1px}.subtitle{color:#44748d;font-size:14px}.pill{background:#fff9;border:2px solid white;padding:9px 14px;border-radius:30px;font-weight:800;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 8px}.stat{background:var(--cream);border:2px solid white;border-radius:16px;text-align:center;padding:10px 5px;box-shadow:0 4px 0 #5a90ab28}.stat small{display:block;color:#6d8c9b;font-size:11px;font-weight:800}.stat strong{display:block;color:#125b84;font-size:24px}.stat.speed strong{color:#e0782d}.brief{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.speechbox{background:#cfe3ef;border:3px solid #effaff;border-radius:18px;min-height:84px;padding:16px 18px 14px 18px;color:#175378;box-shadow:inset 0 1px 0 #ffffffa0}.speechbox .title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}.speechbox .desc{font-weight:800;font-size:15px}.speechbox .sub{margin-top:6px;font-size:12px;color:#4b7084}.controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}button{background:var(--accent);color:#654000;border:0;border-radius:15px;padding:16px 18px;font-weight:900;font-size:15px;box-shadow:0 5px #c68c30;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px #c68c30}.secondary{background:white;color:#245a76;box-shadow:0 5px #b2ccd9}.stageWrap{margin-top:16px;border:8px solid #f7fcff;border-radius:20px;overflow:hidden;background:#122a3b;box-shadow:0 11px 0 #498eaa,0 17px 28px #0c446244}canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}.help{background:#ffffffc7;padding:13px 16px;border-radius:14px;margin-top:14px;font-size:13px;line-height:1.75;color:#355e73}.records{margin-top:8px;color:#456d82;font-size:12px}.tag{display:inline-block;background:#e8f8fe;padding:2px 7px;border-radius:6px;font-weight:800;color:#195c7c}@media(max-width:900px){.dashboard{padding-left:225px;min-height:255px}.hero{width:210px;top:-2px}.speechbox .title{font-size:23px}}@media(max-width:720px){main{padding:8px}.dashboard{padding:152px 10px 12px 10px;min-height:auto}.hero{width:175px;left:50%;transform:translateX(-50%);top:-6px}.hud{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:7px 2px}.stat strong{font-size:17px}.stat small{font-size:9px}.brief{grid-template-columns:1fr}.speechbox{min-height:70px}.speechbox .title{font-size:20px}.stageWrap{border-width:4px}button{padding:12px 13px;font-size:14px}}
+/* v1.4.8 iPhone Safari viewport-safe layout */
 .mobileHUD,.mobileControls,.rotateNotice,.mobileTip{display:none}
 html.mobile-root,html.mobile-root body{height:100%;overflow:hidden;overscroll-behavior:none}
 body.mobile-mode{background:#071e32;position:fixed;inset:0;width:100%;height:100%;overflow:hidden;touch-action:manipulation}
@@ -64,7 +64,43 @@ body.mobile-mode.portrait-play .mobileShell{grid-template-rows:40px minmax(0,1fr
 .arcadeResultText{text-align:center;gap:3px}
 @media(max-width:850px) and (orientation:landscape){.arcadeVideo{height:clamp(88px,24dvh,142px)}.arcadePanel{gap:5px}.arcadeVideoControls{padding:0 4px 3px}.arcadeVideoControls button{padding:3px 8px!important;font-size:11px!important}}
 @media(max-width:440px) and (orientation:portrait){.arcadeVideo{height:clamp(140px,26dvh,225px)}}
-</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.4.1</small></h1><div class="subtitle">CUSTOMS MATA · ARCADE TOP 5 · 탐지견 영상 결과 화면</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점 <button type="button" id="openRanks" class="scoreboardTrigger">🏅 TOP 5</button></div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.4.1</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button><button class="fullBtn" id="mRanks">🏆 TOP 5</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 가로화면으로 진행</button><button class="secondary" id="portraitPlay">세로로도 테스트</button></div><div class="mobileTip" id="mobileTip" role="status" aria-live="polite"></div><div class="help">🎯 <b>플레이:</b> 오른쪽에서 왼쪽으로 움직이는 가방 속 <b>의심물품을 정확히 클릭</b>하세요. 총·도검 +100 · 마약 의심 +150 · 명품 +70 · 액체류 +50점. <b>일반물품 클릭 -30점 / 의심물품 놓침 -40점 / 빈 곳 클릭 0점.</b> <b>검은 리트리버 탐지견은 마약 의심 물질이 든 캐리어 앞에서만 멈춰 컹컹 알려줍니다.</b> 순찰 중에는 업로드한 헥헥 사운드, 경보 시에는 업로드한 멍멍 사운드가 재생됩니다. 마타를 클릭해도 게임은 계속 진행되며, 탐지견과 수하물 판독 기능은 이전 버전 그대로 유지됩니다. <span class="tag">45초 속도전</span><br>※ 오락용 가상 X-ray 영상입니다. 명품·액체류 등은 게임상의 확인 대상이며 실제 위법성이나 마약 여부를 X-ray 영상만으로 확정할 수 없습니다.</div><div class="records" id="records"></div></main><section class="arcadeModal" id="arcadeModal" role="dialog" aria-modal="true" aria-label="오락실 명예의 전당" hidden><div class="arcadePanel"><h2 class="arcadeHeader" id="arcadeTitle">🏆 HALL OF FAME</h2><p class="arcadeSub" id="arcadeSub">MATA X-RAY · TOP 5</p><div class="arcadeResult" id="arcadeResult" hidden><div class="arcadeVideoBox"><video id="arcadeVideo" class="arcadeVideo" playsinline webkit-playsinline muted autoplay preload="metadata" aria-label="탐지견 촬영 영상"></video><div class="arcadeVideoControls"><button type="button" id="arcadeVideoReplay">↻ 영상 다시 보기</button></div></div><div class="arcadeResultText"><span class="arcadeResultTitle" id="arcadeResultTitle"></span><span class="arcadeScore" id="arcadePoints"></span></div></div><div class="arcadeRanks" id="arcadeRanks"></div><form class="arcadeEntry" id="arcadeEntry" hidden><input class="arcadeName" id="arcadeName" type="text" maxlength="8" autocomplete="off" spellcheck="false" placeholder="이름 또는 닉네임 (최대 8자)" aria-label="랭킹 등록 이름" required><button type="submit" id="arcadeSubmit">기록 등록</button></form><div class="arcadeHint" id="arcadeHint"></div><div class="arcadeActions"><button type="button" id="arcadeReplay">↻ 다시 도전</button><button type="button" id="arcadeClose">닫기</button></div></div></section><script>
+
+/* v1.4.8 desktop compact dashboard: designed for 1920×1080 and smaller laptop viewports */
+@media(min-width:901px){
+  main{padding:8px 12px 18px;max-width:1160px}
+  .dashboard{padding:9px 12px 9px 296px;min-height:0;border-width:3px;border-radius:18px;box-shadow:0 5px 0 #71aecd,0 10px 20px #2d6e8d24}
+  .hero{width:290px;left:2px;top:7px;pointer-events:none}
+  .heroMata{width:100%;height:auto;filter:none;image-rendering:auto}
+  header{align-items:center;gap:8px;flex-wrap:nowrap}
+  h1{font-size:clamp(22px,2.2vw,28px);line-height:1.16}
+  .subtitle{font-size:11px;margin-top:2px}
+  .pill{padding:3px 8px;font-size:12px;border-width:1px;display:flex;gap:6px;align-items:center}
+  .scoreboardTrigger{padding:7px 9px;font-size:12px;box-shadow:none;border-radius:9px}
+  .hud{margin:7px 0;gap:7px}
+  .stat{padding:4px 2px;border-radius:11px;border-width:1px;box-shadow:none}
+  .stat small{font-size:10px}
+  .stat strong{font-size:18px;line-height:1.15}
+  .brief{gap:8px}
+  .speechbox{min-height:0;padding:6px 11px;border-width:2px;border-radius:11px;box-shadow:none}
+  .speechbox .title{font-size:17px;line-height:1.13;margin-bottom:2px}
+  .speechbox .desc{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .speechbox .sub{display:none}
+  .controls{gap:6px;flex-wrap:nowrap}
+  .controls button{padding:10px 10px;font-size:12px;border-radius:9px;white-space:nowrap;box-shadow:0 3px #c68c30}
+  .controls button.secondary{box-shadow:0 3px #b2ccd9}
+  .stageWrap{margin-top:9px;border-width:5px;border-radius:14px;box-shadow:0 5px 0 #498eaa,0 10px 17px #0c446222}
+  .records{margin-top:6px;font-size:11px}
+}
+.helpModal[hidden]{display:none!important}
+.helpModal{position:fixed;inset:0;z-index:19500;display:flex;justify-content:center;align-items:center;background:rgba(3,18,32,.75);padding:18px}
+.helpPanel{position:relative;max-width:590px;width:100%;max-height:min(90vh,740px);overflow:auto;border-radius:18px;padding:22px 26px 24px;background:#e8f7ff;border:3px solid #7bbcd8;box-shadow:0 20px 60px #001c36aa;color:#1b4a67}
+.helpPanel h2{margin:0 0 14px;font-size:24px;color:#064a73}
+.helpPanel p{line-height:1.65;margin:7px 0;font-size:15px}
+.helpPanel .points{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.helpPanel .points span{background:#fff;border-radius:9px;padding:8px 10px;font-weight:800}
+.helpPanel .closeHelp{margin-top:14px}
+@media(max-width:900px){.helpPanel{padding:15px}.helpPanel h2{font-size:20px}}
+</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.4.8</small></h1><div class="subtitle">CUSTOMS MATA · PC COMPACT · 하단 스캐너 정보 정리</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점 <button type="button" id="openRanks" class="scoreboardTrigger">🏅 TOP 5</button></div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button class="secondary" id="showHelp" type="button">❔ 게임방법</button><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.4.8</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button><button class="fullBtn" id="mRanks">🏆 TOP 5</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 가로화면으로 진행</button><button class="secondary" id="portraitPlay">세로로도 테스트</button></div><div class="mobileTip" id="mobileTip" role="status" aria-live="polite"></div><div class="records" id="records"></div></main><section id="helpModal" class="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden><div class="helpPanel"><h2 id="helpTitle">🐾 마타의 X-RAY 탐지 대작전 · 게임방법</h2><p>45초 동안 오른쪽에서 왼쪽으로 이동하는 수하물을 검사하고, <b>의심물품을 정확히 클릭</b>하세요.</p><div class="points"><span>🔫 총·도검 +100점</span><span>📦 마약 의심 +150점</span><span>👜 명품 +70점</span><span>🧴 액체류 +50점</span><span>⚠ 일반 물품 -30점</span><span>⌛ 의심물품 놓침 -40점</span></div><p>빈 공간은 눌러도 감점되지 않습니다. 연속 적발하면 콤보와 컨베이어 속도가 올라갑니다.</p><p>🐕 탐지견은 <b>마약 의심 물품이 든 가방에만</b> 반응합니다. 헥헥거리며 순찰하다가 해당 가방에서 한 번 짖어 힌트를 줍니다.</p><p>🏆 종료 후 TOP 5에 진입하면 이름을 기록할 수 있습니다. 현재 랭킹은 이 브라우저에 저장됩니다.</p><p style="font-size:12px;color:#54768a">※ 게임용 가상 X-ray 영상으로, 실제 위법 여부나 마약 성분을 영상만으로 단정할 수 없습니다.</p><button id="closeHelp" type="button" class="closeHelp">게임으로 돌아가기</button></div></section><section class="arcadeModal" id="arcadeModal" role="dialog" aria-modal="true" aria-label="오락실 명예의 전당" hidden><div class="arcadePanel"><h2 class="arcadeHeader" id="arcadeTitle">🏆 HALL OF FAME</h2><p class="arcadeSub" id="arcadeSub">MATA X-RAY · TOP 5</p><div class="arcadeResult" id="arcadeResult" hidden><div class="arcadeVideoBox"><video id="arcadeVideo" class="arcadeVideo" playsinline webkit-playsinline muted autoplay preload="metadata" aria-label="탐지견 촬영 영상"></video><div class="arcadeVideoControls"><button type="button" id="arcadeVideoReplay">↻ 영상 다시 보기</button></div></div><div class="arcadeResultText"><span class="arcadeResultTitle" id="arcadeResultTitle"></span><span class="arcadeScore" id="arcadePoints"></span></div></div><div class="arcadeRanks" id="arcadeRanks"></div><form class="arcadeEntry" id="arcadeEntry" hidden><input class="arcadeName" id="arcadeName" type="text" maxlength="8" autocomplete="off" spellcheck="false" placeholder="이름 또는 닉네임 (최대 8자)" aria-label="랭킹 등록 이름" required><button type="submit" id="arcadeSubmit">기록 등록</button></form><div class="arcadeHint" id="arcadeHint"></div><div class="arcadeActions"><button type="button" id="arcadeReplay">↻ 다시 도전</button><button type="button" id="arcadeClose">닫기</button></div></div></section><script>
 'use strict';
 const C=document.querySelector('#game'),g=C.getContext('2d'),$=id=>document.getElementById(id),W=C.width,H=C.height;
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
@@ -87,6 +123,8 @@ const dog={x:150,y:798,dir:1,patrolMin:142,patrolMax:W-155,step:0,mode:'patrol',
 const barkAudio=new Audio('assets/bark.mp3'); barkAudio.preload='auto'; barkAudio.volume=.84;
 const pantAudio=new Audio('assets/pant.mp3'); pantAudio.preload='auto'; pantAudio.volume=.58;
 const dogSprite=new Image(); dogSprite.src='assets/dog_neon_tight.png';
+const dogLookFrames=Array.from({length:17},(_,i)=>{const im=new Image();im.src='assets/dog_motion/look_'+String(i).padStart(2,'0')+'.png';return im});
+
 const dogDraw={x:0,y:0,w:0,h:0,scale:0};
 // Decorative mascot should never restart, pause, or select an item.
 const mataDecoration=$('mataDecoration');
@@ -298,38 +336,33 @@ let shift=elapsed*beltSpeed()*.55%65;g.strokeStyle='rgba(103,190,216,.45)';g.lin
 let noiseShift=(elapsed*48)%18;for(let y=126-noiseShift;y<391;y+=6){g.fillStyle='rgba(176,244,255,.032)';g.fillRect(0,y,W,1)}for(let y=132-noiseShift*.3;y<388;y+=17){g.fillStyle='rgba(255,255,255,.015)';g.fillRect(0,y,W,.8)}
 let gr2=g.createLinearGradient(0,418,0,H);gr2.addColorStop(0,'#15241f');gr2.addColorStop(.52,'#253729');gr2.addColorStop(1,'#111913');g.fillStyle=gr2;g.fillRect(0,418,W,172);g.fillStyle='#2b4331';g.fillRect(0,423,W,5);let laneShift=(elapsed*72*.25)%92;g.strokeStyle='#425545';g.lineWidth=2;for(let x=-laneShift;x<W+92;x+=92){g.beginPath();g.moveTo(x,430);g.lineTo(x+35,585);g.stroke()}g.fillStyle='#68806b';g.fillRect(0,584,W,4);
 let hudGlow=g.createLinearGradient(0,0,W,0);hudGlow.addColorStop(0,'rgba(150,235,255,.12)');hudGlow.addColorStop(.4,'rgba(255,215,125,.08)');hudGlow.addColorStop(1,'rgba(150,235,255,.12)');g.fillStyle=hudGlow;g.fillRect(14,14,W-28,58);
-g.fillStyle='#d8f6ff';g.textAlign='left';g.font='bold 16px system-ui';g.fillText('MATA X-RAY · SCANNER 06',23,32);g.fillStyle='#ffcf78';g.font='bold 14px system-ui';g.fillText('◀ BELT MOVING    SPEED ×'+factor().toFixed(1)+(combo>=3?'   ⚡ COMBO BOOST!':''),23,60);g.fillStyle='#d4f1d0';g.fillText('🐕 RETRIEVER PATROL  '+(dog.mode==='alert'?'DRUG ALERT!':'SNIFFING...'),23,440);g.textAlign='right';g.fillStyle='#b8dce3';g.font='13px system-ui';g.fillText('SIMULATED DUAL-ENERGY PALETTE',W-23,32);g.textAlign='left';
+g.textAlign='left';/* lower deck status replaces the old retriever patrol label */g.fillStyle='rgba(5,25,37,.55)';g.beginPath();g.roundRect(14,427,338,55,9);g.fill();g.fillStyle='#d8f6ff';g.font='bold 15px system-ui';g.fillText('MATA X-RAY · SCANNER 06',24,446);g.fillStyle='#ffcf78';g.font='bold 13px system-ui';g.fillText('◀ BELT MOVING    SPEED ×'+factor().toFixed(1)+(combo>=3?'   ⚡ COMBO BOOST!':''),24,468);g.textAlign='right';g.fillStyle='#b8dce3';g.font='13px system-ui';g.fillText('SIMULATED DUAL-ENERGY PALETTE',W-23,32);g.textAlign='left';
 g.fillStyle='rgba(117,200,255,.7)';g.fillRect(W-198,45,42,7);g.fillStyle='rgba(255,191,80,.7)';g.fillRect(W-148,45,42,7);g.fillStyle='rgba(145,214,183,.7)';g.fillRect(W-98,45,42,7);g.fillStyle='#d1ecf5';g.font='11px system-ui';g.fillText('금속',W-198,67);g.fillText('유기물',W-148,67);g.fillText('일반',W-98,67);
 for(let y=0;y<H;y+=5){g.fillStyle='rgba(170,239,242,.02)';g.fillRect(0,y,W,1)}
 let vign=g.createLinearGradient(0,0,0,120);vign.addColorStop(0,'rgba(0,0,0,.22)');vign.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=vign;g.fillRect(0,0,W,120);g.fillStyle='rgba(0,0,0,.12)';g.fillRect(0,0,W,8);g.fillRect(0,H-8,W,8);g.fillStyle='rgba(0,0,0,.08)';g.fillRect(0,108,12,302);g.fillRect(W-12,108,12,302)}
 function drawRetriever(){
-g.save();
-g.translate(dog.x,dog.y);
+g.save();g.translate(dog.x,dog.y);
 if(dog.dir<0)g.scale(-1,1);
-let scale=(dog.mode==='alert'?0.481:0.465);
-let w=dogSprite.width*scale,h=dogSprite.height*scale;
-let scanTurn=(dog.mode==='alert'?Math.sin(elapsed*14)*0.02:Math.sin(dog.lookPhase)*0.05);
-let sniffDip=(dog.mode==='alert'?Math.abs(Math.sin(elapsed*12))*1.2:Math.abs(Math.sin(dog.sniffPhase))*3.0);
-let bob=(dog.mode==='alert'?Math.sin(elapsed*18)*1.3:Math.sin(dog.step)*0.9);
-let x=-w/2,y=-h+18+bob+sniffDip;
-dogDraw.x=dog.x+x; dogDraw.y=dog.y+y; dogDraw.w=w; dogDraw.h=h; dogDraw.scale=scale;
-g.fillStyle='rgba(0,0,0,.28)';
-g.beginPath();g.ellipse(0,24,w*0.22,h*0.025,0,0,Math.PI*2);g.fill();
-if(dogSprite.complete && dogSprite.naturalWidth){
-  g.save();
-  if(scanTurn!==0) g.rotate(scanTurn);
-  g.drawImage(dogSprite,x,y,w,h);
-  g.restore();
-  // subtle nose-targeting motion while patrolling: tiny overlay nudge of the head area
-  if(dog.mode!=='alert'){
-    g.save();
-    g.beginPath();g.rect(x+w*0.52,y,w*0.28,h*0.18);g.clip();
-    g.translate(Math.sin(dog.lookPhase)*2.3, Math.abs(Math.sin(dog.sniffPhase))*1.8);
+const scale=(dog.mode==='alert'?0.481:0.465);
+const w=dogSprite.naturalWidth*scale,h=dogSprite.naturalHeight*scale;
+const sniffDip=dog.mode==='alert'?Math.abs(Math.sin(dog.sniffPhase))*1.2:Math.abs(Math.sin(dog.sniffPhase))*2.7;
+const bob=(dog.mode==='alert'?Math.sin(elapsed*18)*1.3:Math.sin(dog.step)*.9);
+const x=-w/2,y=-h+18+bob+sniffDip;
+dogDraw.x=dog.x+x;dogDraw.y=dog.y+y;dogDraw.w=w;dogDraw.h=h;dogDraw.scale=scale;
+g.fillStyle='rgba(0,0,0,.25)';g.beginPath();g.ellipse(0,24,w*.22,h*.025,0,0,Math.PI*2);g.fill();
+if(dogSprite.complete&&dogSprite.naturalWidth){
+  // Rigidly rotated head on fixed body, with feathered neck blending.
+  // Each 918x1319 frame includes 110px transparent padding on all sides.
+  const angle=dog.mode==='alert'?Math.sin(dog.lookPhase)*1.5:Math.sin(dog.lookPhase)*10;
+  const frameIndex=Math.max(0,Math.min(16,Math.round((angle+10)/1.25)));
+  const frame=dogLookFrames[frameIndex];
+  if(frame&&frame.complete&&frame.naturalWidth){
+    g.drawImage(frame,x-110*scale,y-110*scale,918*scale,1319*scale);
+  }else{
     g.drawImage(dogSprite,x,y,w,h);
-    g.restore();
   }
 }else{
-  g.fillStyle='#111'; g.beginPath(); g.ellipse(0,-40,40,65,0,0,Math.PI*2); g.fill();
+  g.fillStyle='#111';g.beginPath();g.ellipse(0,-40,40,65,0,0,Math.PI*2);g.fill();
 }
 if(dog.mode==='alert'&&dog.barkClock>0){
   g.globalAlpha=Math.min(1,dog.barkClock/.55);
@@ -367,7 +400,7 @@ function pointHitsDog(px,py){ return false }
 function visibleDrugTarget(){let candidates=bags.filter(b=>bagHasUnfoundDrug(b)&&b.x+b.w/2>0&&b.x-b.w/2<W);if(!candidates.length)return null;candidates.sort((a,b)=>Math.abs(a.x-dog.x)-Math.abs(b.x-dog.x));return candidates[0]}
 function updateDog(dt){
 dog.step+=dt*(dog.mode==='alert'?2.4:3.4);
-dog.lookPhase+=dt*(dog.mode==='alert'?2.8:2.1);
+dog.lookPhase+=dt*(dog.mode==='alert'?1.3:1.55);
 dog.sniffPhase+=dt*(dog.mode==='alert'?7.0:5.6);
 dog.barkClock=Math.max(0,dog.barkClock-dt);
 dog.barkCooldown=Math.max(0,dog.barkCooldown-dt);
@@ -403,24 +436,23 @@ if(target){
   if(dog.pantCooldown<=0){playFile(pantAudio);dog.pantCooldown=3.2}
 }
 }
-// Short original two-second arcade finish melody; respects the game's sound toggle.
+// Soft-faded 20-second excerpt of the user-provided music. Video audio stays muted.
+// Playback is controlled by the same in-game sound switch used for effects.
+const finishMusic=new Audio('assets/ending_music.mp3');
+finishMusic.preload='auto';
+finishMusic.loop=false;
+finishMusic.volume=0.8; // Source MP3 is attenuated for iOS Safari, which may ignore element.volume
+function stopFinishJingle(){
+  finishMusic.pause();
+  try{finishMusic.currentTime=0}catch(e){}
+}
 function playFinishJingle(){
+  stopFinishJingle();
   if(!sound)return;
   try{
-    audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
-    if(audioCtx.state==='suspended')audioCtx.resume().catch(()=>{});
-    const now=audioCtx.currentTime+.04;
-    const melody=[[523.25,0,.16],[659.25,.18,.16],[783.99,.36,.18],[1046.50,.57,.34],[783.99,1.0,.15],[1046.50,1.20,.42]];
-    for(const [pitch,delay,duration] of melody){
-      const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
-      osc.type='triangle';osc.frequency.setValueAtTime(pitch,now+delay);
-      gain.gain.setValueAtTime(.0001,now+delay);
-      gain.gain.exponentialRampToValueAtTime(.052,now+delay+.018);
-      gain.gain.exponentialRampToValueAtTime(.0001,now+delay+duration);
-      osc.connect(gain).connect(audioCtx.destination);
-      osc.start(now+delay);osc.stop(now+delay+duration+.02);
-    }
-  }catch(err){console.warn('Finish sound unavailable:',err)}
+    const pending=finishMusic.play();
+    if(pending&&typeof pending.catch==='function')pending.catch(err=>console.warn('Ending music play was blocked:',err));
+  }catch(err){console.warn('Ending music unavailable:',err)}
 }
 // Random archival footage is independent of the leaderboard outcome.
 const END_CLIPS=['bad1','bad2','bad3','bad4','good1','good2','good3','good4','good5'];
@@ -451,7 +483,7 @@ function persistRanks(){try{localStorage.setItem(RANK_KEY,JSON.stringify(ranks))
 function qualifies(s){return Number.isFinite(s)&&s>0&&(ranks.length<5||s>ranks[4].score)}
 function renderRanks(){const root=$('arcadeRanks');root.replaceChildren();for(let i=0;i<5;i++){const row=document.createElement('div');row.className='arcadeRank';const n=document.createElement('span'),name=document.createElement('span'),points=document.createElement('strong');n.textContent=String(i+1).padStart(2,'0');name.textContent=ranks[i]?.name||'---';points.textContent=ranks[i]?ranks[i].score.toLocaleString()+' P':'---';row.append(n,name,points);root.appendChild(row)}}
 function openArcade(isResult=false){if(!isResult)stopResultVideo();const modal=$('arcadeModal');modal.hidden=false;$('arcadeResult').hidden=!isResult;$('arcadeEntry').hidden=!(isResult&&pendingScore!==null);$('arcadeTitle').textContent='🏆 TOP 5 HALL OF FAME';$('arcadeSub').textContent=isResult?'45초 검사 종료 · 오락실 기록표':'이 기기의 TOP 5 랭킹';$('arcadeHint').textContent=isResult&&pendingScore!==null?'축하합니다! 닉네임을 등록하면 명예의 전당에 남습니다.':'※ 현재 버전은 이 기기에만 기록됩니다.';renderRanks();if(isResult){const yes=pendingScore!==null;startResultVideo();$('arcadeResultTitle').textContent=yes?'NEW HIGH SCORE!':'다음에는 TOP 5에 도전!';$('arcadePoints').textContent=score.toLocaleString()+' POINTS';if(yes){$('arcadeName').value='';}}}
-function hideArcade(){stopResultVideo();pendingScore=null;$('arcadeModal').hidden=true}
+function hideArcade(){stopFinishJingle();stopResultVideo();pendingScore=null;$('arcadeModal').hidden=true}
 function finish(){running=false;paused=false;remain=0;pantAudio.pause();barkAudio.pause();if(score>best){best=score;try{localStorage.setItem('mata_xray_best_v06',String(best))}catch(e){}$('best').textContent=best;}const win=qualifies(score);pendingScore=win?score:null;say(win?'TOP 5 진입!':'검사 완료!',win?'미소와 함께 명예의 전당에 이름을 남겨봐!':'수고했어! 다음 기록에 도전해보자.',`최종 ${score}점 · 적발 ${hits}건`,win?'love':'sad');$('start').textContent='↻ 처음부터';updateHud();draw();openArcade(true);playFinishJingle()}
 $('arcadeEntry').addEventListener('submit',e=>{e.preventDefault();if(pendingScore===null)return;const name=$('arcadeName').value.trim().replace(/[<>\u0000-\u001f]/g,'').slice(0,8);if(!name){$('arcadeHint').textContent='이름을 한 글자 이상 입력해주세요.';return;}ranks=readRanks();if(!qualifies(pendingScore)){$('arcadeEntry').hidden=true;$('arcadeHint').textContent='기록이 갱신되어 TOP 5 진입 조건을 다시 확인해주세요.';pendingScore=null;renderRanks();return;}ranks.push({name,score:pendingScore,at:Date.now()});ranks.sort((a,b)=>b.score-a.score||a.at-b.at);ranks=ranks.slice(0,5);pendingScore=null;persistRanks();$('arcadeEntry').hidden=true;$('arcadeHint').textContent='✅ 기록 등록 완료! 이 기기에 저장되었습니다.';renderRanks()});
 $('arcadeClose').addEventListener('click',hideArcade);
@@ -494,6 +526,24 @@ function itemHit(it,px,py){let dx=px-it.dx,dy=py-it.dy,c=Math.cos(-it.angle),s=M
 C.addEventListener('pointerdown',e=>{if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found)continue;if(itemHit(it,x-b.x,y-b.y)){let priority=(it.cat==='normal'?0:1000)+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;effect(x,y,'-30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');beep(210,.17,'sawtooth')}else{combo++;let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,y,'+'+pts);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'마약 의심 물질 발견!', combo>=3?'마타와 탐지견의 합동 적발이야!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '마타가 발바닥 도장을 찍었어!', `+${pts}점 · 계속 찾아보자!`, 'success')}beep(650+Math.min(8,combo)*70,.095)}updateHud();});
 $('start').onclick=()=>{hideArcade();cancelAnimationFrame(raf);bags=[];fx=[];running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;counts={weapon:0,drug:0,luxury:0,liquid:0};spawn=.1;last=performance.now();dog.x=150;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='↻ 처음부터';$('pause').textContent='⏸ 일시정지';say('수색 준비 완료!', '마타와 함께 수상한 물품을 찾아보자!', '리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
 $('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';if(paused){pantAudio.pause();barkAudio.pause();cancelAnimationFrame(raf)}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
-$('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause()}$('sound').textContent=sound?'🔊 효과음 ON':'🔇 효과음 OFF'};
+$('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause();stopFinishJingle()}$('sound').textContent=sound?'🔊 효과음 ON':'🔇 효과음 OFF'};
+// Game guide pauses an active session while open, and resumes only if the guide paused it.
+let helpPausedGame=false;
+function openGameHelp(){
+  if(!$('helpModal').hidden)return;
+  helpPausedGame=running&&!paused;
+  if(helpPausedGame)$('pause').click();
+  $('helpModal').hidden=false;
+}
+function closeGameHelp(){
+  if($('helpModal').hidden)return;
+  $('helpModal').hidden=true;
+  if(helpPausedGame&&running&&paused)$('pause').click();
+  helpPausedGame=false;
+}
+$('showHelp').addEventListener('click',openGameHelp);
+$('closeHelp').addEventListener('click',closeGameHelp);
+$('helpModal').addEventListener('click',e=>{if(e.target===$('helpModal'))closeGameHelp()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('helpModal').hidden)closeGameHelp()});
 updateHud();draw();
 </script></body></html>
