@@ -1,6 +1,6 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.7.7</title><style>
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>마타의 X-RAY 탐지 대작전 v1.7.9</title><style>
 :root{font-family:system-ui,'Malgun Gothic',sans-serif;color:#173b53;--sky:#c7e7f7;--panel:#d8edf8;--deep:#0d4971;--cream:#f6f2e8;--accent:#ffbf47}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 20% 0%,#e8fbff,#add8eb 55%,#7cb4d1)}main{max-width:1160px;margin:auto;padding:16px}.dashboard{position:relative;background:linear-gradient(180deg,#cde9f7,#b8ddf0);border-radius:26px;border:4px solid #ecf8fe;box-shadow:0 10px 0 #71aecd,0 18px 28px #2d6e8d3a;padding:16px 16px 14px 300px;min-height:285px;overflow:visible}.hero{position:absolute;left:6px;top:-22px;width:290px;pointer-events:auto;user-select:none;touch-action:manipulation;filter:none;z-index:5}.heroMata{display:block;max-width:100%;height:auto}header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}h1{margin:0;color:#0c4d7b;font-size:clamp(23px,3vw,35px);letter-spacing:-1px}.subtitle{color:#44748d;font-size:14px}.pill{background:#fff9;border:2px solid white;padding:9px 14px;border-radius:30px;font-weight:800;white-space:nowrap}.hud{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0 8px}.stat{background:var(--cream);border:2px solid white;border-radius:16px;text-align:center;padding:10px 5px;box-shadow:0 4px 0 #5a90ab28}.stat small{display:block;color:#6d8c9b;font-size:11px;font-weight:800}.stat strong{display:block;color:#125b84;font-size:24px}.stat.speed strong{color:#e0782d}.brief{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.speechbox{background:#cfe3ef;border:3px solid #effaff;border-radius:18px;min-height:84px;padding:16px 18px 14px 18px;color:#175378;box-shadow:inset 0 1px 0 #ffffffa0}.speechbox .title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:6px}.speechbox .desc{font-weight:800;font-size:15px}.speechbox .sub{margin-top:6px;font-size:12px;color:#4b7084}.controls{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}button{background:var(--accent);color:#654000;border:0;border-radius:15px;padding:16px 18px;font-weight:900;font-size:15px;box-shadow:0 5px #c68c30;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px #c68c30}.secondary{background:white;color:#245a76;box-shadow:0 5px #b2ccd9}.stageWrap{margin-top:16px;border:8px solid #f7fcff;border-radius:20px;overflow:hidden;background:#122a3b;box-shadow:0 11px 0 #498eaa,0 17px 28px #0c446244}canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:crosshair}.help{background:#ffffffc7;padding:13px 16px;border-radius:14px;margin-top:14px;font-size:13px;line-height:1.75;color:#355e73}.records{margin-top:8px;color:#456d82;font-size:12px}.tag{display:inline-block;background:#e8f8fe;padding:2px 7px;border-radius:6px;font-weight:800;color:#195c7c}@media(max-width:900px){.dashboard{padding-left:225px;min-height:255px}.hero{width:210px;top:-2px}.speechbox .title{font-size:23px}}@media(max-width:720px){main{padding:8px}.dashboard{padding:152px 10px 12px 10px;min-height:auto}.hero{width:175px;left:50%;transform:translateX(-50%);top:-6px}.hud{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:7px 2px}.stat strong{font-size:17px}.stat small{font-size:9px}.brief{grid-template-columns:1fr}.speechbox{min-height:70px}.speechbox .title{font-size:20px}.stageWrap{border-width:4px}button{padding:12px 13px;font-size:14px}}
-/* v1.7.7 iPhone Safari viewport-safe layout */
+/* v1.7.9 iPhone Safari viewport-safe layout */
 .mobileHUD,.mobileControls,.rotateNotice,.mobileTip{display:none}
 html.mobile-root,html.mobile-root body{height:100%;overflow:hidden;overscroll-behavior:none}
 body.mobile-mode{background:#071e32;position:fixed;inset:0;width:100%;height:100%;overflow:hidden;touch-action:manipulation}
@@ -65,7 +65,7 @@ body.mobile-mode.portrait-play .mobileShell{grid-template-rows:40px minmax(0,1fr
 @media(max-width:850px) and (orientation:landscape){.arcadeVideo{height:clamp(88px,24dvh,142px)}.arcadePanel{gap:5px}.arcadeVideoControls{padding:0 4px 3px}.arcadeVideoControls button{padding:3px 8px!important;font-size:11px!important}}
 @media(max-width:440px) and (orientation:portrait){.arcadeVideo{height:clamp(140px,26dvh,225px)}}
 
-/* v1.7.7 desktop compact dashboard: designed for 1920×1080 and smaller laptop viewports */
+/* v1.7.9 desktop compact dashboard: designed for 1920×1080 and smaller laptop viewports */
 @media(min-width:901px){
   main{padding:8px 12px 18px;max-width:1160px}
   .dashboard{padding:9px 12px 9px 296px;min-height:0;border-width:3px;border-radius:18px;box-shadow:0 5px 0 #71aecd,0 10px 20px #2d6e8d24}
@@ -100,11 +100,11 @@ body.mobile-mode.portrait-play .mobileShell{grid-template-rows:40px minmax(0,1fr
 .helpPanel .points span{background:#fff;border-radius:9px;padding:8px 10px;font-weight:800}
 .helpPanel .closeHelp{margin-top:14px}
 @media(max-width:900px){.helpPanel{padding:15px}.helpPanel h2{font-size:20px}}
-</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.7.7</small></h1><div class="subtitle">CUSTOMS MATA · PC COMPACT · 하단 스캐너 정보 정리</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점 <button type="button" id="openRanks" class="scoreboardTrigger">🏅 TOP 5</button></div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button class="secondary" id="showHelp" type="button">❔ 게임방법</button><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.7.7</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button><button class="fullBtn" id="mRanks">🏆 TOP 5</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 가로화면으로 진행</button><button class="secondary" id="portraitPlay">세로로도 테스트</button></div><div class="mobileTip" id="mobileTip" role="status" aria-live="polite"></div><div class="records" id="records"></div></main><section id="helpModal" class="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden><div class="helpPanel"><h2 id="helpTitle">🐾 마타의 X-RAY 탐지 대작전 · 게임방법</h2><p>45초 동안 오른쪽에서 왼쪽으로 이동하는 수하물을 검사하고, <b>의심물품을 정확히 클릭</b>하세요. 여행·출장·쇼핑·식품 등 수하물마다 물품 구성은 달라지며, 겉모양만으로 검사 결과를 알 수는 없습니다.</p><div class="points"><span>🔫 총기·도검 +100점</span><span>📦 마약 의심 +150점</span><span>👜 고가품 +70점</span><span>🍾 주류 +55점</span><span>🍎 검역품 +60점</span><span>⚠ 일반 물품 -30점</span><span>⌛ 의심물품 놓침 -40점</span></div><p>빈 공간은 눌러도 감점되지 않습니다. 연속 적발하면 콤보와 컨베이어 속도가 올라갑니다.</p><p>🐕 탐지견은 <b>마약 의심 물품이 든 가방에만</b> 반응합니다. 헥헥거리며 순찰하다가 해당 가방에서 한 번 짖어 힌트를 줍니다.</p><p>🏆 종료 후 TOP 5에 진입하면 이름을 기록할 수 있습니다. 현재 랭킹은 이 브라우저에 저장됩니다.</p><p style="font-size:12px;color:#54768a">※ 게임용 가상 X-ray 영상으로, 실제 위법 여부나 마약 성분을 영상만으로 단정할 수 없습니다.</p><button id="closeHelp" type="button" class="closeHelp">게임으로 돌아가기</button></div></section><section class="arcadeModal" id="arcadeModal" role="dialog" aria-modal="true" aria-label="오락실 명예의 전당" hidden><div class="arcadePanel"><h2 class="arcadeHeader" id="arcadeTitle">🏆 HALL OF FAME</h2><p class="arcadeSub" id="arcadeSub">MATA X-RAY · TOP 5</p><div class="arcadeResult" id="arcadeResult" hidden><div class="arcadeVideoBox"><video id="arcadeVideo" class="arcadeVideo" playsinline webkit-playsinline muted autoplay preload="metadata" aria-label="탐지견 촬영 영상"></video><div class="arcadeVideoControls"><button type="button" id="arcadeVideoReplay">↻ 영상 다시 보기</button></div></div><div class="arcadeResultText"><span class="arcadeResultTitle" id="arcadeResultTitle"></span><span class="arcadeScore" id="arcadePoints"></span></div></div><div class="arcadeRanks" id="arcadeRanks"></div><form class="arcadeEntry" id="arcadeEntry" hidden><input class="arcadeName" id="arcadeName" type="text" maxlength="8" autocomplete="off" spellcheck="false" placeholder="이름 또는 닉네임 (최대 8자)" aria-label="랭킹 등록 이름" required><button type="submit" id="arcadeSubmit">기록 등록</button></form><div class="arcadeHint" id="arcadeHint"></div><div class="arcadeActions"><button type="button" id="arcadeReplay">↻ 다시 도전</button><button type="button" id="arcadeClose">닫기</button></div></div></section><script>
+</style></head><body><main><section class="dashboard"><div class="hero" id="mataDecoration" aria-label="마타 캐릭터"><img id="heroMata" draggable="false" class="heroMata" src="assets/inspect.png" alt="관세청 캐릭터 마타"></div><header><div><h1>🐾 마타의 X-RAY 탐지 대작전 <small style="font-size:14px">v1.7.9</small></h1><div class="subtitle">CUSTOMS MATA · PC COMPACT · 하단 스캐너 정보 정리</div></div><div class="pill">🏆 최고기록 <span id="best">0</span>점 <button type="button" id="openRanks" class="scoreboardTrigger">🏅 TOP 5</button></div></header><section class="hud"><div class="stat"><small>⏱ 남은 시간</small><strong id="time">45</strong></div><div class="stat"><small>⭐ 점수</small><strong id="score">0</strong></div><div class="stat"><small>🐾 적발</small><strong id="hits">0</strong></div><div class="stat speed"><small>🔥 콤보 / 속도</small><strong><span id="combo">0</span> · <span id="speed">×1.0</span></strong></div><div class="stat"><small>⚠ 오적발</small><strong id="errors">0</strong></div></section><div class="brief"><div class="speechbox"><div class="title" id="speechTitle">수색 준비 완료!</div><div class="desc" id="speechDesc">마타와 함께 수상한 물품을 찾아보자!</div><div class="sub" id="speechSub">리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.</div></div><div class="controls"><button class="secondary" id="showHelp" type="button">❔ 게임방법</button><button id="start">↻ 처음부터</button><button class="secondary" id="pause">⏸ 일시정지</button><button class="secondary" id="sound">🔊 효과음 ON</button></div></div></section><div class="mobileShell"><div class="mobileHUD" aria-label="모바일 게임 상태"><span class="mobileBrand">🐾 마타 X-RAY <small>v1.7.9</small></span><div class="mobileStats"><span>⏱ <strong id="mTime">45</strong></span><span>⭐ <strong id="mScore">0</strong></span><span>🔥 <strong id="mCombo">0</strong></span></div></div><div class="stageWrap"><canvas id="game" width="1120" height="590" aria-label="움직이는 수하물의 X-ray 의심물품을 찾는 게임"></canvas></div><nav class="mobileControls" aria-label="모바일 게임 조작"><button id="mStart">▶ 게임 시작</button><button class="secondary" id="mPause">⏸ 일시정지</button><button class="secondary" id="mSound">🔊 소리 ON</button><button class="fullBtn" id="mFull">⛶ 전체화면</button><button class="fullBtn" id="mRanks">🏆 TOP 5</button></nav></div><div class="rotateNotice" aria-label="가로화면 전환 안내"><div class="rotateIcon">📱 ↻</div><h2>휴대폰을 가로로 돌려주세요</h2><p>가로화면에서 스크롤 없이 X-ray 게임을 즐길 수 있어요.<br>일부 브라우저는 가로화면 잠금이 제한됩니다.</p><button id="rotateStart">▶ 가로화면으로 진행</button><button class="secondary" id="portraitPlay">세로로도 테스트</button></div><div class="mobileTip" id="mobileTip" role="status" aria-live="polite"></div><div class="records" id="records"></div></main><section id="helpModal" class="helpModal" role="dialog" aria-modal="true" aria-labelledby="helpTitle" hidden><div class="helpPanel"><h2 id="helpTitle">🐾 마타의 X-RAY 탐지 대작전 · 게임방법</h2><p>45초 동안 오른쪽에서 왼쪽으로 이동하는 수하물을 검사하고, <b>의심물품을 정확히 클릭</b>하세요. 여행·출장·쇼핑·식품 등 수하물마다 물품 구성은 달라지며, 겉모양만으로 검사 결과를 알 수는 없습니다.</p><div class="points"><span>🔫 총기·도검 +150점</span><span>📦 마약 의심 +300점</span><span>👜 고가품 +90점</span><span>🍾 주류 +70점</span><span>🍎 검역품 +50점</span><span>⚠ 일반 물품 -30점</span><span>⌛ 의심물품 놓침 -40점</span></div><p>빈 공간은 눌러도 감점되지 않습니다. 연속 적발하면 콤보와 컨베이어 속도가 올라갑니다.</p><p>🐕 탐지견은 <b>마약 의심 물품이 든 가방에만</b> 반응합니다. 헥헥거리며 순찰하다가 해당 가방에서 한 번 짖어 힌트를 줍니다.</p><p>🏆 종료 후 TOP 5에 진입하면 이름을 기록할 수 있습니다. 현재 랭킹은 이 브라우저에 저장됩니다.</p><p style="font-size:12px;color:#54768a">※ 게임용 가상 X-ray 영상으로, 실제 위법 여부나 마약 성분을 영상만으로 단정할 수 없습니다.</p><button id="closeHelp" type="button" class="closeHelp">게임으로 돌아가기</button></div></section><section class="arcadeModal" id="arcadeModal" role="dialog" aria-modal="true" aria-label="오락실 명예의 전당" hidden><div class="arcadePanel"><h2 class="arcadeHeader" id="arcadeTitle">🏆 HALL OF FAME</h2><p class="arcadeSub" id="arcadeSub">MATA X-RAY · TOP 5</p><div class="arcadeResult" id="arcadeResult" hidden><div class="arcadeVideoBox"><video id="arcadeVideo" class="arcadeVideo" playsinline webkit-playsinline muted autoplay preload="metadata" aria-label="탐지견 촬영 영상"></video><div class="arcadeVideoControls"><button type="button" id="arcadeVideoReplay">↻ 영상 다시 보기</button></div></div><div class="arcadeResultText"><span class="arcadeResultTitle" id="arcadeResultTitle"></span><span class="arcadeScore" id="arcadePoints"></span></div></div><div class="arcadeRanks" id="arcadeRanks"></div><form class="arcadeEntry" id="arcadeEntry" hidden><input class="arcadeName" id="arcadeName" type="text" maxlength="8" autocomplete="off" spellcheck="false" placeholder="이름 또는 닉네임 (최대 8자)" aria-label="랭킹 등록 이름" required><button type="submit" id="arcadeSubmit">기록 등록</button></form><div class="arcadeHint" id="arcadeHint"></div><div class="arcadeActions"><button type="button" id="arcadeReplay">↻ 다시 도전</button><button type="button" id="arcadeClose">닫기</button></div></div></section><script>
 'use strict';
 const C=document.querySelector('#game'),g=C.getContext('2d'),$=id=>document.getElementById(id),W=C.width,H=C.height;
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-const CATS={weapon:{name:'총기·도검',points:100},drug:{name:'마약 의심',points:150},luxury:{name:'고가품',points:70},liquid:{name:'주류',points:55},quarantine:{name:'검역품',points:60},normal:{name:'일반물품',points:0}};
+const CATS={weapon:{name:'총기·도검',points:150},drug:{name:'마약 의심',points:300},luxury:{name:'고가품',points:90},liquid:{name:'주류',points:70},quarantine:{name:'검역품',points:50},normal:{name:'일반물품',points:0}};
 const OPTIONS={
 weapon:['pistol','revolver','rifle','knife','chefknife','dagger','sword','longknife','machete','scissors','longknife','machete'],
 drug:['vacuumbrick','doublebrick','zipbag','powderpouch','capsulestrip','pillbottle','vialpack','bundle'],
@@ -307,7 +307,7 @@ function bagFactory(){
   clusters.forEach((grp,idx)=>grp.forEach(t=>plan.push({slot:'normal',type:t,cluster:idx})));
   while(plan.length<n){plan.push({slot:'normal',type:pick(content.normal),cluster:Math.floor(rand(0,Math.max(1,clusters.length)))});}
   while(plan.length>n)plan.splice(Math.floor(rand(0,plan.length)),1);
-  // v1.7.7: diversified luggage contents; unique visuals by default.
+  // v1.7.9: diversified luggage contents; unique visuals by default.
   const repeatable=new Set(['tshirt','longsleeve','sock','underwear','shoe','jeans','shorts','pajamas','facemask','wetwipes']);
   const used=new Map();
   for(let i=0;i<plan.length;i++){
@@ -468,18 +468,36 @@ function drawTravelItem(t){
     if(t==='aqua_shoe')for(let x=-23;x<18;x+=11)ellipse(x,4,3,3);
   }else if(t==='laundrybag'){rr(-36,-36,72,70,8);line([[-30,-24],[30,-24]]);for(let y=-8;y<25;y+=13)line([[-25,y],[25,y]]);}
   else if(bottle){
-    rr(-20,-32,40,70,10);rr(-11,-43,22,13,3);
-    g.fillStyle='rgba(190,250,250,.2)';g.fillRect(-15,2,30,23);
-    line([[-13,-12],[13,-12]]);line([[-11,9],[11,9]]);
-    if(t==='sunscreen'){path([[-9,-20],[0,-27],[9,-20],[0,-12]],true);g.stroke();}
-    if(t==='eyedrops'){line([[0,-43],[0,-49]]);}
+    // Different packaging silhouettes: pump, squeeze bottle, travel flask, dropper.
+    if(t==='shampoo'||t==='bodywash'){
+      path([[-19,-32],[19,-32],[24,-19],[24,35],[-24,35],[-24,-19]],true);strokeFill();
+      rr(-9,-45,18,13,3);if(t==='shampoo'){line([[0,-45],[0,-52]]);line([[0,-52],[19,-52]]);}
+    }else if(t==='sunscreen'){
+      path([[-17,-35],[17,-35],[24,31],[-24,31]],true);strokeFill();rr(-14,30,28,12,3);
+    }else if(t==='eyedrops'){
+      path([[-14,-25],[14,-25],[20,26],[10,35],[-10,35],[-20,26]],true);strokeFill();
+      path([[-10,-25],[0,-47],[10,-25]],true);strokeFill();
+    }else{rr(-22,-31,44,70,11);rr(-12,-44,24,14,3);}
+    g.strokeStyle='rgba(238,251,255,.76)';g.lineWidth=1.5;
+    line([[-13,-8],[13,-8]]);line([[-15,11],[15,11]]);
+    line([[-10,21],[10,21]]);
+    g.fillStyle='rgba(190,250,250,.17)';g.fillRect(-11,-2,22,12);
   }else if(tube){path([[-22,36],[22,36],[14,-30],[-14,-30]],true);strokeFill();rr(-15,-41,30,11,3);line([[-12,7],[12,7]]);}
   else if(box){
-    rr(-34,-27,68,54,6);
-    if(['compact','contactcase','creamjar'].includes(t)){ellipse(0,0,18,16);line([[-18,-16],[18,-16]]);}
-    else if(t==='facemask'){line([[-25,-11],[25,-11]]);line([[-23,12],[23,12]]);}
-    else if(t==='pillcase'){for(let x=-18;x<25;x+=18)for(let y=-13;y<18;y+=17)ellipse(x,y,5,5);}
-    else {for(let y=-14;y<20;y+=11)line([[-25,y],[25,y]]);}
+    if(t==='creamjar'){
+      rr(-30,-22,60,49,11);rr(-32,-33,64,14,4);ellipse(0,2,17,11);
+    }else if(t==='compact'||t==='contactcase'){
+      ellipse(0,0,33,27);ellipse(0,0,23,17);line([[-28,0],[28,0]]);
+    }else if(t==='pillcase'){
+      rr(-33,-29,66,58,7);for(let x=-18;x<25;x+=18)for(let y=-13;y<18;y+=17)ellipse(x,y,5,5);
+    }else if(t==='facemask'){
+      path([[-28,-36],[25,-31],[33,34],[-30,31]],true);strokeFill();
+      line([[-23,-15],[24,-15]]);line([[-20,1],[24,1]]);line([[-18,17],[21,17]]);
+    }else if(t==='sleepmask'){
+      ellipse(0,4,36,19);ellipse(-13,4,9,7);ellipse(13,4,9,7);line([[-33,2],[-43,2]]);line([[33,2],[43,2]]);
+    }else{
+      rr(-34,-27,68,54,6);for(let y=-14;y<20;y+=11)line([[-25,y],[25,y]]);
+    }
   }else if(['cable','hanger','travelpen','curler'].includes(t)){
     if(t==='cable'){g.beginPath();g.ellipse(0,0,32,22,0,0,Math.PI*2);g.stroke();rr(23,-14,18,13,3);}
     if(t==='hanger'){path([[-40,21],[0,-10],[40,21]],false);g.stroke();g.beginPath();g.arc(0,-17,11,Math.PI,0);g.stroke();}
@@ -495,6 +513,17 @@ function drawTravelItem(t){
     if(t==='neckpillow'){g.beginPath();g.arc(0,0,34,.2,Math.PI*1.8);g.stroke();g.beginPath();g.arc(0,0,18,.3,Math.PI*1.7);g.stroke();}
     else {path([[-31,25],[-31,-19],[-12,-37],[12,-37],[31,-19],[31,25]],true);strokeFill();line([[-20,-10],[20,-10]]);if(t==='raincoat')line([[0,-34],[0,24]]);}
   }else {rr(-34,-25,68,50,8);for(let y=-14;y<20;y+=11)line([[-25,y],[25,y]]);}
+  // Scanning ribs and closures use low-opacity highlights, not opaque UI icons.
+  g.save();g.globalAlpha=.36;g.strokeStyle='rgba(25,64,107,.82)';g.lineWidth=1.5;
+  if(['pajamas','cardigan','windbreaker','sweater','swimrobe'].includes(t)){
+    line([[-22,24],[22,24]]);line([[-18,31],[18,31]]);
+    if(t==='cardigan'||t==='windbreaker')for(let y=-15;y<25;y+=12)ellipse(0,y,2,2);
+  }
+  if(['toner','lotion','shampoo','bodywash','sunscreen'].includes(t)){
+    line([[-12,17],[12,17]]);
+  }
+  if(['running_shoe','aqua_shoe'].includes(t))line([[-30,21],[30,21]]);
+  g.restore();
   g.restore();
 }
 function itemDraw(it,cx,cy){if(it.found)return;g.save();g.translate(cx,cy);g.rotate(it.angle);g.scale(it.w/90,it.h/90);let cat=it.cat;let styleMap={weapon:{base:'#ff6767',mid:'#d93c3c',edge:'#ffd8d8',glow:'rgba(255,92,92,.34)',scan:'rgba(255,214,214,.18)',alpha:.95,material:'metal'},drug:{base:'#8f5520',mid:'#5f3310',edge:'#d1a173',glow:'rgba(145,95,40,.28)',scan:'rgba(232,198,161,.14)',alpha:.94,material:'organic'},luxury:{base:'#ffd86f',mid:'#d8a73a',edge:'#fff2bb',glow:'rgba(255,220,100,.28)',scan:'rgba(255,244,196,.16)',alpha:.92,material:'dense'},liquid:{base:'#f3d45a',mid:'#cfa336',edge:'#fff0a8',glow:'rgba(243,212,90,.26)',scan:'rgba(255,242,180,.15)',alpha:.89,material:'liquid'},quarantine:{base:'#72d887',mid:'#389f52',edge:'#dcffe3',glow:'rgba(105,226,135,.28)',scan:'rgba(224,255,232,.15)',alpha:.9,material:'organic'},normal:{base:'#88c9dd',mid:'#4f8ea4',edge:'#dff7ff',glow:'rgba(150,223,244,.17)',scan:'rgba(227,248,255,.11)',alpha:.82,material:'mixed'}};let s=styleMap[cat];let grad=g.createLinearGradient(0,-50,0,50);grad.addColorStop(0,s.edge);grad.addColorStop(.22,s.base);grad.addColorStop(.78,s.mid);grad.addColorStop(1,s.edge);g.fillStyle=grad;g.strokeStyle=s.edge;g.lineWidth=2.35;g.globalAlpha=s.alpha;g.lineJoin='round';g.lineCap='round';g.shadowColor=s.glow;g.shadowBlur=3.5;g.shadowOffsetX=0;g.shadowOffsetY=0;
@@ -943,10 +972,10 @@ case 'foldbag': drawTravelItem(it.type);break;
 // Pseudo-X-ray structure: dense cores, textile seams, circuitry and layered attenuation.
 g.save();g.shadowBlur=0;g.lineJoin='round';g.lineCap='round';g.lineWidth=1.9;
 const textile=['tshirt','coat','pants','dress','shoe','backpack','duffel','sock','cap','jeans','shorts','pajamas','cardigan','windbreaker','sweater','trackpants','swimsuit','leggings','scarf','gloves','beanie','running_shoe','aqua_shoe','swimrobe','laundrybag'].includes(it.type);
-const electronics=['laptop','tablet','camera','charger','gamepad','hairdryer','drill','mouse','speaker','powerbank','travelplug','earbuds','curler','travel_scale'].includes(it.type);
+const electronics=['laptop','tablet','camera','charger','gamepad','hairdryer','drill','mouse','speaker','powerbank','travelplug','travel_scale'].includes(it.type);
 const metallic=cat==='weapon'||['tripod','flashlight','umbrella','keys','sunglasses'].includes(it.type);
 if(textile){
-  g.strokeStyle='rgba(236,244,220,.48)';g.lineWidth=2.0;
+  g.strokeStyle='rgba(236,244,220,.31)';g.lineWidth=1.55;
   for(let k=0;k<3;k++){let y=-18+k*15;g.beginPath();g.moveTo(-29,y);g.bezierCurveTo(-12,y+8,8,y-8,29,y+3);g.stroke();}
   g.strokeStyle='rgba(27,79,90,.48)';g.lineWidth=1.3;
   g.beginPath();g.moveTo(-25,-12);g.lineTo(-19,25);g.moveTo(19,-21);g.lineTo(24,24);g.stroke();
@@ -1070,6 +1099,13 @@ for(let i=0;i<b.items.length;i++)for(let j=i+1;j<b.items.length;j++){
 }
 g.restore();
 for(let it of topItems){ g.save(); g.globalAlpha=1; itemDraw(it,it.dx,it.dy); g.restore(); }
+// Subtle contrast for small suspect silhouettes. Does not alter actual collision shapes.
+for(const it of b.items){
+ if(it.found||it.cat==='normal'||Math.min(it.w,it.h)>44)continue;
+ g.save();g.translate(it.dx,it.dy);g.rotate(it.angle);
+ g.strokeStyle=it.cat==='drug'?'rgba(200,144,88,.26)':it.cat==='weapon'?'rgba(255,133,133,.24)':'rgba(250,235,173,.20)';
+ g.lineWidth=1.5;g.beginPath();g.ellipse(0,0,Math.max(17,it.w*.47),Math.max(14,it.h*.48),0,0,Math.PI*2);g.stroke();g.restore();
+}
 // Fine contents are intentionally transparent; see overlapping edges.
 g.save();g.shadowBlur=0;g.globalAlpha=.58;
 g.strokeStyle='rgba(29,83,135,.55)';g.lineWidth=2.3;
@@ -1097,8 +1133,39 @@ if(b.alertFlash>0&&bagHasUnfoundDrug(b)){
 }
 }
 function paw(x,y,scale=1){g.save();g.translate(x,y);g.scale(scale,scale);g.fillStyle='#ffe3a0';g.strokeStyle='#a85b4d';g.lineWidth=2;for(let [a,b] of [[-16,-15],[-5,-24],[8,-23],[20,-12]]){g.beginPath();g.ellipse(a,b,6,8,-.2,0,7);strokeFill()}g.beginPath();g.moveTo(-24,12);g.bezierCurveTo(-23,-5,-11,-10,0,-4);g.bezierCurveTo(12,-12,24,-1,25,13);g.bezierCurveTo(20,27,-19,27,-24,12);strokeFill();g.restore()}
-function effect(x,y,label,good=true,kind='paw'){fx.push({x,y,label,good,kind,life:.9,max:.9})}
-function drawFx(){for(let f of fx){let a=Math.max(0,f.life/f.max);g.save();g.globalAlpha=a;g.translate(f.x,f.y-(1-a)*46);if(f.kind==='paw')paw(0,0,1.15);g.textAlign='center';g.fillStyle=f.good?'#ffe7a0':'#ff919b';g.shadowColor='#07253d';g.shadowBlur=7;g.font='900 26px system-ui';g.fillText(f.label,0,f.kind==='paw'?53:0);g.restore()}}
+function effect(x,y,label,good=true,kind='paw'){
+ fx.push({x,y,label,good,kind,life:.78,max:.78});
+ if(fx.length>55)fx.shift();
+}
+function comboBurst(level,x,y){
+ const display=level>=10?'10 COMBO!':level>=5?'5 COMBO!':'3 COMBO!';
+ fx.push({x:W/2,y:215,label:display,good:true,kind:'combo',level,life:1.05,max:1.05});
+ for(let i=0;i<(level>=10?13:level>=5?9:6);i++){
+  const ang=Math.PI*2*i/(level>=10?13:level>=5?9:6);
+  fx.push({x,y,label:'',kind:'spark',good:true,vx:Math.cos(ang)*rand(55,115),vy:Math.sin(ang)*rand(45,100),life:.43,max:.43});
+ }
+ if(sound){beep(level>=10?1120:level>=5?930:785,.11,'triangle');}
+}
+function drawFx(){for(let f of fx){
+ const a=Math.max(0,f.life/f.max),progress=1-a;
+ g.save();g.globalAlpha=Math.min(1,a*1.7);
+ if(f.kind==='spark'){
+  g.fillStyle='#ffe6a0';g.beginPath();g.arc(f.x+f.vx*progress,f.y+f.vy*progress,Math.max(.4,3.8*a),0,Math.PI*2);g.fill();
+ }else if(f.kind==='combo'){
+  const scale=1+.18*Math.sin(Math.PI*Math.min(1,progress*1.6));
+  g.translate(f.x,f.y-10*progress);g.scale(scale,scale);
+  g.textAlign='center';g.font=f.level>=10?'900 47px system-ui':'900 39px system-ui';
+  g.lineWidth=7;g.strokeStyle='rgba(19,44,64,.85)';g.strokeText(f.label,0,0);
+  g.fillStyle=f.level>=10?'#ffdf70':f.level>=5?'#ffeaa5':'#baf4ff';g.fillText(f.label,0,0);
+ }else{
+  g.translate(f.x,f.y-progress*41);
+  if(f.kind==='paw'){g.save();g.scale(.62+.25*a,.62+.25*a);paw(0,-20,.65);g.restore();}
+  g.textAlign='center';g.fillStyle=f.good?'#ffe7a0':'#ff919b';
+  g.shadowColor='#07253d';g.shadowBlur=5;g.font=f.good?'900 28px system-ui':'900 32px system-ui';
+  g.fillText(f.label,0,f.kind==='paw'?26:0);
+ }
+ g.restore();
+}}
 function background(){let gr=g.createLinearGradient(0,0,0,H);gr.addColorStop(0,'#061726');gr.addColorStop(.44,'#103d58');gr.addColorStop(.77,'#0a2740');gr.addColorStop(1,'#101c18');g.fillStyle=gr;g.fillRect(0,0,W,H);g.fillStyle='#1c495d';g.fillRect(0,108,W,302);g.fillStyle='#113651';g.fillRect(0,126,W,265);
 // Visually bridge the blue Mata dashboard and the dark scanner behind Mata's legs.
 // A radial fade, not a rectangular patch, avoids the appearance of a leftover cut-out background.
@@ -1317,7 +1384,7 @@ function frame(t){
   }
   draw();
 }
-function itemHit(it,px,py){let dx=px-it.dx,dy=py-it.dy,c=Math.cos(-it.angle),s=Math.sin(-it.angle),xx=dx*c-dy*s,yy=dx*s+dy*c;let rx=it.w*.54,ry=it.h*.55;return (xx*xx)/(rx*rx)+(yy*yy)/(ry*ry)<=1}
+function itemHit(it,px,py){let dx=px-it.dx,dy=py-it.dy,c=Math.cos(-it.angle),s=Math.sin(-it.angle),xx=dx*c-dy*s,yy=dx*s+dy*c;let suspect=it.cat!=='normal';let rx=Math.max(it.w*.54,suspect?23:0),ry=Math.max(it.h*.55,suspect?18:0);return (xx*xx)/(rx*rx)+(yy*yy)/(ry*ry)<=1}
 let awaitingFirstStart=true;
 C.style.cursor='pointer';
 C.addEventListener('pointerdown',e=>{
@@ -1326,7 +1393,7 @@ C.addEventListener('pointerdown',e=>{
     $('start').click();
     return;
   }
-  if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];const local=pointToBagLocal(b,x,y);for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found)continue;if(itemHit(it,local.x,local.y)){let priority=(it.cat==='normal'?0:1000)+(it.layer||0)*160+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;effect(x,y,'-30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');beep(210,.17,'sawtooth')}else{combo++;let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,y,'+'+pts);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'마약 의심 물질 발견!', combo>=3?'마타와 탐지견의 합동 적발이야!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '마타가 발바닥 도장을 찍었어!', `+${pts}점 · 계속 찾아보자!`, 'success')}beep(650+Math.min(8,combo)*70,.095)}updateHud();});
+  if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];const local=pointToBagLocal(b,x,y);if(Math.abs(local.x)>b.w*.49||Math.abs(local.y)>b.h*.49)continue;for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found)continue;if(itemHit(it,local.x,local.y)){let proximity=Math.hypot((local.x-it.dx)/Math.max(it.w,20),(local.y-it.dy)/Math.max(it.h,20));let priority=(it.cat==='normal'?0:1000)+(it.layer||0)*120+Math.max(-100,90-proximity*130)+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;effect(x,y,'✕ -30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');beep(210,.17,'sawtooth')}else{combo++;let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,y,'+'+pts);if(combo===3||combo===5||combo===10)comboBurst(combo,x,y);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'마약 의심 물질 발견!', combo>=3?'마타와 탐지견의 합동 적발이야!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '마타가 발바닥 도장을 찍었어!', `+${pts}점 · 계속 찾아보자!`, 'success')}beep(650+Math.min(8,combo)*70,.095)}updateHud();});
 $('start').onclick=()=>{awaitingFirstStart=false;C.style.cursor='crosshair';hideArcade();cancelAnimationFrame(raf);bags=[];fx=[];running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;counts={weapon:0,drug:0,luxury:0,liquid:0,quarantine:0};spawn=.1;last=performance.now();dog.x=150;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='↻ 처음부터';$('pause').textContent='⏸ 일시정지';say('수색 준비 완료!', '마타와 함께 수상한 물품을 찾아보자!', '리트리버는 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
 $('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ 계속하기':'⏸ 일시정지';if(paused){pantAudio.pause();barkAudio.pause();cancelAnimationFrame(raf)}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
 $('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause();stopFinishJingle()}$('sound').textContent=sound?'🔊 효과음 ON':'🔇 효과음 OFF'};
