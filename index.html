@@ -1082,38 +1082,56 @@ function drawDogFootprints(){
 }
 // A recessed seven-segment counter printed on the patrol floor, BELOW Miso's sprite.
 function drawFloorCounter(){
- // Conveyor-mounted inspection counter: aligned vertically with the floor caution stripe.
- // The stripe is painted first and the gauge overlays it as equipment attached to the belt.
- const x=15,y=407,w=190,h=50;
+ // Belt-mounted inspection counter. Bright ice-cyan, tapered 7-segment digits match the visual reference.
+ // Mounted in front of the floor CAUTION stripe, under Miso's sprite.
+ const x=15,y=402,w=190,h=60;
  g.save();
- g.shadowColor='rgba(0,0,0,.48)';g.shadowBlur=5;g.shadowOffsetY=2;
- g.fillStyle='#070b10';g.strokeStyle='#8096a3';g.lineWidth=1.5;
+ g.shadowColor='rgba(0,0,0,.48)';g.shadowBlur=6;g.shadowOffsetY=2;
+ g.fillStyle='#05090d';g.strokeStyle='#8095a0';g.lineWidth=1.5;
  g.beginPath();g.roundRect(x,y,w,h,3);g.fill();g.stroke();
  g.shadowBlur=0;g.shadowOffsetY=0;
- g.fillStyle='#8b9ca8';g.fillRect(x+15,y-3,w-30,3);
- g.fillStyle='#4e616b';g.fillRect(x+20,y-1,w-40,1);
- g.fillStyle='#121a21';g.fillRect(x+3,y+3,w-6,h-6);
- g.strokeStyle='rgba(156,183,195,.14)';g.strokeRect(x+3.5,y+3.5,w-7,h-7);
- // Header uses about the same 12 px size as the top high-score label.
- g.font='700 12px Arial Narrow, Arial, system-ui';
- g.fillStyle='#d1dce4';g.textAlign='left';g.textBaseline='middle';
- g.fillText('INSPECTION',x+11,y+13);
+ // Bracket ties the unit visually to the conveyor's lower body.
+ g.fillStyle='#879aa5';g.fillRect(x+16,y-3,w-32,3);
+ g.fillStyle='#151e26';g.fillRect(x+3,y+3,w-6,h-6);
+ g.strokeStyle='rgba(173,196,208,.18)';g.strokeRect(x+3.5,y+3.5,w-7,h-7);
+ // Single-line header: English instrument label + Korean inspection count.
+ const heading='INSPECTION · 누적 검사 횟수';
+ g.font='700 11.5px Arial, Malgun Gothic, sans-serif';
+ g.fillStyle='#dce7ee';g.textAlign='left';g.textBaseline='middle';
+ g.save();g.translate(x+9,y+12);
+ const headerWidth=g.measureText(heading).width;
+ if(headerWidth>w-18)g.scale((w-18)/headerWidth,1);
+ g.fillText(heading,0,0);g.restore();
  const txt=floorCounterValue===null?'------':String(floorCounterValue).padStart(6,'0').slice(-6);
  const patterns={0:'abcdef',1:'bc',2:'abged',3:'abgcd',4:'fgbc',5:'afgcd',6:'afgecd',7:'abc',8:'abcdefg',9:'abfgcd','-':'g'};
- function digit(ch,dx,dy){
-  const l=dx+1,r=dx+15,t=dy+1,m=dy+9.4,b=dy+19;
-  const seg={a:[l,t,r,t],b:[r+.6,t+1.6,r+.6,m-1.6],c:[r+.6,m+1.6,r+.6,b-1.6],d:[l,b,r,b],e:[l-.6,m+1.6,l-.6,b-1.6],f:[l-.6,t+1.6,l-.6,m-1.6],g:[l,m,r,m]};
-  g.lineCap='butt';g.lineWidth=2.25;
-  for(const [id,pts] of Object.entries(seg)){
-   const on=(patterns[ch]||'').includes(id);
-   g.strokeStyle=on?'#ff3028':'#270d0b';
-   g.shadowColor=on?'rgba(255,47,35,.48)':'transparent';g.shadowBlur=on?2.2:0;
-   g.beginPath();g.moveTo(pts[0],pts[1]);g.lineTo(pts[2],pts[3]);g.stroke();
+ function polygon(coords){g.beginPath();g.moveTo(coords[0][0],coords[0][1]);for(let j=1;j<coords.length;j++)g.lineTo(coords[j][0],coords[j][1]);g.closePath();g.fill();}
+ function digit(ch,ox,oy){
+  // Taller-than-wide, diagonally chamfered segments instead of broad blunt strokes.
+  const Wd=18,Hd=28,t=3.5,h=t*.64;
+  const top=0,mid=Hd/2,bot=Hd;
+  const segment={
+   a:[[h,top],[Wd-h,top],[Wd-t,top+t],[t,top+t]],
+   g:[[t,mid-h],[Wd-t,mid-h],[Wd-h,mid],[Wd-t,mid+h],[t,mid+h],[h,mid]],
+   d:[[t,bot-t],[Wd-t,bot-t],[Wd-h,bot],[h,bot]],
+   f:[[0,h],[t,t+h],[t,mid-t],[0,mid-h]],
+   b:[[Wd,h],[Wd,mid-h],[Wd-t,mid-t],[Wd-t,t+h]],
+   e:[[0,mid+h],[t,mid+t],[t,bot-t-h],[0,bot-h]],
+   c:[[Wd-t,mid+t],[Wd,mid+h],[Wd,bot-h],[Wd-t,bot-t-h]]
+  };
+  g.save();g.translate(ox,oy);
+  const lit=patterns[ch]||'';
+  for(const [key,pts] of Object.entries(segment)){
+   g.fillStyle=lit.includes(key)?'#d9ffff':'#18292d';
+   g.shadowColor=lit.includes(key)?'#42fff8':'transparent';
+   g.shadowBlur=lit.includes(key)?7:0;
+   polygon(pts);
   }
   g.shadowBlur=0;
+  // restrained luminous core makes the LED characters white at center, cyan on edges
+  g.restore();
  }
- // Larger separation between header and digits, without widening each numeral.
- for(let i=0;i<txt.length;i++)digit(txt[i],x+21+i*23,y+27);
+ const pitch=24, digitsWidth=18+5*pitch, firstX=x+(w-digitsWidth)/2;
+ for(let i=0;i<txt.length;i++)digit(txt[i],firstX+i*pitch,y+24);
  g.restore();
 }
 function drawPatrolFloor(){
