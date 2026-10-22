@@ -1382,10 +1382,12 @@ function startResultVideo(){
 $('arcadeVideoReplay').addEventListener('click',()=>{
   try{resultVideo.muted=true;resultVideo.currentTime=0;resultVideo.play().catch(()=>{})}catch(err){console.warn('Video replay:',err)}
 });
-// Shared leaderboard TEST integration. Public INSERT is not tamper-resistant.
+// Online leaderboard: submissions use Edge Function; public INSERT must be revoked after verification.
 const SB_URL='https://jawgtlmamluohnqomfyc.supabase.co';
 const SB_KEY='sb_publishable_FDgVkUSoFmjEVgGpKLxHTA_vHKLyAgY';
 const SB_TABLE=SB_URL+'/rest/v1/leaderboard';
+const SB_SUBMIT=SB_URL+'/functions/v1/submit-score';
+let completedGameDuration=45,completedSubmissionId=null;
 let ranks=[],pendingScore=null,ranksOnline=false,rankingRequest=0,submittingRank=false;
 async function sbRequest(path,options={}){
  const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),8000);
@@ -1394,6 +1396,15 @@ async function sbRequest(path,options={}){
   if(!response.ok){const body=await response.text();throw new Error('HTTP '+response.status+': '+body.slice(0,160))}
   if(response.status===204||response.status===205)return null;
   const body=await response.text();return body?JSON.parse(body):null;
+ }finally{clearTimeout(timer)}
+}
+async function submitVerifiedScore(payload){
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),10000);
+ try{
+  const response=await fetch(SB_SUBMIT,{method:'POST',headers:{'apikey':SB_KEY,'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok||result.ok!==true){const message=result.error||('서버 응답 '+response.status);const err=new Error(message);err.status=response.status;throw err;}
+  return result;
  }finally{clearTimeout(timer)}
 }
 function qualifies(s){return ranksOnline&&Number.isFinite(s)&&s>0&&(ranks.length<5||s>ranks[4].score)}
@@ -1425,7 +1436,7 @@ function openArcade(isResult=false){
  refreshRanks(isResult);
 }
 function hideArcade(){++rankingRequest;stopFinishJingle();stopResultVideo();pendingScore=null;$('arcadeModal').hidden=true}
-function finish(){running=false;paused=false;remain=0;pantAudio.pause();barkAudio.pause();if(score>best){best=score;try{localStorage.setItem('mata_xray_best_v06',String(best))}catch(e){}$('best').textContent=best;}pendingScore=null;say('검사 완료!','온라인 TOP 5 기록을 확인해봐!',`최종 ${score}점 · 적발 ${hits}건`,'love');$('start').textContent='처음부터';updateHud();draw();openArcade(true);playFinishJingle()}
+function finish(){completedGameDuration=elapsed;completedSubmissionId=crypto.randomUUID();running=false;paused=false;remain=0;pantAudio.pause();barkAudio.pause();if(score>best){best=score;try{localStorage.setItem('mata_xray_best_v06',String(best))}catch(e){}$('best').textContent=best;}pendingScore=null;say('검사 완료!','온라인 TOP 5 기록을 확인해봐!',`최종 ${score}점 · 적발 ${hits}건`,'love');$('start').textContent='처음부터';updateHud();draw();openArcade(true);playFinishJingle()}
 $('arcadeEntry').addEventListener('submit',async e=>{
  e.preventDefault();if(pendingScore===null||submittingRank||!ranksOnline)return;
  const name=$('arcadeName').value.trim().replace(/[<>\u0000-\u001f]/g,'').slice(0,8);
@@ -1433,17 +1444,17 @@ $('arcadeEntry').addEventListener('submit',async e=>{
  const submittedScore=pendingScore;submittingRank=true;$('arcadeSubmit').disabled=true;
  $('arcadeHint').textContent='기록 등록 중...';
  try{
-  await sbRequest('',{method:'POST',headers:{'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({nickname:name,score:submittedScore})});
+  await submitVerifiedScore({nickname:name,score:submittedScore,duration:completedGameDuration,submission_id:completedSubmissionId});
   pendingScore=null;$('arcadeEntry').hidden=true;
   $('arcadeHint').textContent='✅ 기록이 데이터베이스에 저장됐어. 순위 확인 중...';
   try{
    await refreshRanks(false);
-   $('arcadeHint').textContent=ranksOnline?'✅ 온라인 랭킹에 기록을 등록했어! (테스트 모드)':'✅ 기록 저장 성공! 순위 조회만 실패했어. TOP 5를 다시 열어 확인해줘.';
+   $('arcadeHint').textContent=ranksOnline?'✅ 서버 검증을 거쳐 온라인 기록을 등록했어!':'✅ 기록 저장 성공! 순위 조회만 실패했어. TOP 5를 다시 열어 확인해줘.';
   }catch(refreshError){
    console.warn('Leaderboard refresh after successful insert failed:',refreshError);
    $('arcadeHint').textContent='✅ 기록 저장 성공! 순위 갱신은 실패했어.';
   }
- }catch(err){console.warn('Leaderboard registration failed:',err);$('arcadeHint').textContent='등록 요청 오류: '+String(err.message||err).slice(0,130)+' (서버 테이블에서 실제 저장 여부를 확인해줘)';}
+ }catch(err){console.warn('Leaderboard registration failed:',err);$('arcadeHint').textContent='등록 실패: '+String(err.message||err).slice(0,120)+(err.status===409?'':' · 연결 오류라면 재시도해줘.');}
  finally{submittingRank=false;$('arcadeSubmit').disabled=false}
 });
 $('arcadeClose').addEventListener('click',hideArcade);
@@ -1510,7 +1521,7 @@ C.addEventListener('pointerdown',e=>{
     return;
   }
   if(!running||paused)return;try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}let r=C.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;let hitsFound=[];for(let i=0;i<bags.length;i++){let b=bags[i];const local=pointToBagLocal(b,x,y);if(Math.abs(local.x)>b.w*.49||Math.abs(local.y)>b.h*.49)continue;for(let j=0;j<b.items.length;j++){let it=b.items[j];if(it.found||it.passed)continue;if(itemHit(it,local.x,local.y)){let proximity=Math.hypot((local.x-it.dx)/Math.max(it.w,20),(local.y-it.dy)/Math.max(it.h,20));let priority=(it.cat==='normal'?0:1000)+(it.layer||0)*120+Math.max(-100,90-proximity*130)+i*10-j;hitsFound.push({bagIndex:i,itemIndex:j,b,it,priority});}}}if(!hitsFound.length)return;hitsFound.sort((a,b)=>b.priority-a.priority);let hit=hitsFound[0], it=hit.it;it.found=true;if(it.cat==='normal'){score-=30;errors++;combo=0;impactFeedback(hit.b,it);effect(x,y,'✕ -30',false,'text');say('앗! 일반 물품이야!', '조금 더 신중하게 판독해봐!', '오적발 -30점 · 콤보 초기화', 'think');/* error sound supplied by impactFeedback */}else{combo++;impactFeedback(hit.b,it);let bonus=Math.min(130,(combo-1)*15),pts=CATS[it.cat].points+bonus;score+=pts;hits++;counts[it.cat]++;effect(x,Math.max(140,y-18),'+'+pts,true,'text');if(combo===3||combo===5||combo===10)comboBurst(combo,x,y);if(it.cat==='drug'){say(combo>=3?'좋아, 탐지견 힌트 적중!':'', combo>=3?'마타와 탐지견의 환상 콤보!':'탐지견이 알려준 캐리어에서 의심 물질을 찾았어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, combo>=3?'love':'success')}else if(combo>=3){say('콤보 시작!', '좋아, 리듬을 탔어!', `+${pts}점 · 컨베이어 속도 ${factor().toFixed(1)}배`, 'wave')}else{say(CATS[it.cat].name+' 발견!', '', `+${pts}점 · 계속 찾아보자!`, 'success')}/* success sound supplied by impactFeedback */}updateHud();});
-$('start').onclick=()=>{if($('start').disabled)return;if(!bagWorker&&readyBags.length<2){prepareBagQueue().then(()=>{if(!$('start').disabled)$('start').click()});return;}awaitingFirstStart=false;C.style.cursor='url("assets/target_cursor.svg") 20 20, default';hideArcade();cancelAnimationFrame(raf);fillBagQueue();bags=[];beltPosters=[];nextPosterAt=9;posterSequence=0;posterOrder=shufflePosterOrder();posterSlowUntil=0;fx=[];lastMissReaction=-Infinity;running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;mataComboIndex=0;mataComboClock=0;ruleCached=-1;counts={weapon:0,blade:0,drug:0,luxury:0,liquid:0,quarantine:0,animal:0,seafood:0,yellowOther:0};spawn=.1;last=performance.now();dog.x=dog.patrolMin;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;resetNaturalPatrol();resetDogFootprints();try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='처음부터';$('pause').textContent='일시정지';say('검사 준비 완료!', '이제부터 수상한 물품을 찾아보자!', '마약 탐지견은 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
+$('start').onclick=()=>{if($('start').disabled)return;if(!bagWorker&&readyBags.length<2){prepareBagQueue().then(()=>{if(!$('start').disabled)$('start').click()});return;}awaitingFirstStart=false;C.style.cursor='url("assets/target_cursor.svg") 20 20, default';hideArcade();cancelAnimationFrame(raf);fillBagQueue();bags=[];beltPosters=[];nextPosterAt=9;posterSequence=0;posterOrder=shufflePosterOrder();posterSlowUntil=0;fx=[];lastMissReaction=-Infinity;running=true;paused=false;remain=45;score=hits=errors=combo=elapsed=0;completedSubmissionId=null;completedGameDuration=45;mataComboIndex=0;mataComboClock=0;ruleCached=-1;counts={weapon:0,blade:0,drug:0,luxury:0,liquid:0,quarantine:0,animal:0,seafood:0,yellowOther:0};spawn=.1;last=performance.now();dog.x=dog.patrolMin;dog.y=798;dog.dir=1;dog.mode='patrol';dog.step=0;dog.barkClock=0;dog.barkCooldown=0;dog.pantCooldown=.2;dog.targetBagId=null;dog.lastAnnouncedBagId=null;dog.lookPhase=0;dog.sniffPhase=0;resetNaturalPatrol();resetDogFootprints();try{audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();}catch(err){}$('start').textContent='처음부터';$('pause').textContent='일시정지';say('검사 준비 완료!', '이제부터 수상한 물품을 찾아보자!', '마약 탐지견은 아래쪽에서 냄새를 맡으며 순찰하고, 마약 의심 캐리어가 지나갈 때만 컹컹 알려줘.', 'inspect');updateHud();raf=requestAnimationFrame(frame)};
 $('pause').onclick=()=>{if(!running)return;paused=!paused;$('pause').textContent=paused?'계속하기':'일시정지';if(paused){pantAudio.pause();barkAudio.pause();cancelAnimationFrame(raf)}else{last=performance.now();raf=requestAnimationFrame(frame)}draw()};
 $('sound').onclick=()=>{sound=!sound;if(!sound){pantAudio.pause();barkAudio.pause();stopFinishJingle()}$('sound').textContent=sound?'효과음':'음소거'};
 // Game guide pauses an active session while open, and resumes only if the guide paused it.
