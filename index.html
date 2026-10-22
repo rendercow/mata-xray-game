@@ -1082,35 +1082,38 @@ function drawDogFootprints(){
 }
 // A recessed seven-segment counter printed on the patrol floor, BELOW Miso's sprite.
 function drawFloorCounter(){
- // Compact conveyor-mounted inspection counter: slimmer, sharper and visually attached to the conveyor.
- const x=15,y=403,w=148,h=34;
+ // Conveyor-mounted inspection counter: aligned vertically with the floor caution stripe.
+ // The stripe is painted first and the gauge overlays it as equipment attached to the belt.
+ const x=15,y=407,w=190,h=50;
  g.save();
- g.shadowColor='rgba(0,0,0,.42)';g.shadowBlur=4;g.shadowOffsetY=2;
- g.fillStyle='#060a0d';g.strokeStyle='#7d9099';g.lineWidth=1.45;
- g.beginPath();g.roundRect(x,y,w,h,2.5);g.fill();g.stroke();
+ g.shadowColor='rgba(0,0,0,.48)';g.shadowBlur=5;g.shadowOffsetY=2;
+ g.fillStyle='#070b10';g.strokeStyle='#8096a3';g.lineWidth=1.5;
+ g.beginPath();g.roundRect(x,y,w,h,3);g.fill();g.stroke();
  g.shadowBlur=0;g.shadowOffsetY=0;
- // metal top mount so it reads like a fixed inspection gauge on the conveyor body
- g.fillStyle='#8da0aa';g.fillRect(x+12,y-4,w-24,4);
- g.fillStyle='#4f626e';g.fillRect(x+16,y-2,w-32,2);
- g.fillStyle='#111820';g.fillRect(x+3,y+3,w-6,h-6);
- g.strokeStyle='rgba(160,182,194,.14)';g.strokeRect(x+3.5,y+3.5,w-7,h-7);
- g.font='700 7px Arial Narrow, Arial, system-ui';g.fillStyle='#c0cdd6';g.textAlign='left';g.textBaseline='middle';
- g.fillText('INSPECTION · 누적검사',x+7,y+8);
+ g.fillStyle='#8b9ca8';g.fillRect(x+15,y-3,w-30,3);
+ g.fillStyle='#4e616b';g.fillRect(x+20,y-1,w-40,1);
+ g.fillStyle='#121a21';g.fillRect(x+3,y+3,w-6,h-6);
+ g.strokeStyle='rgba(156,183,195,.14)';g.strokeRect(x+3.5,y+3.5,w-7,h-7);
+ // Header uses about the same 12 px size as the top high-score label.
+ g.font='700 12px Arial Narrow, Arial, system-ui';
+ g.fillStyle='#d1dce4';g.textAlign='left';g.textBaseline='middle';
+ g.fillText('INSPECTION',x+11,y+13);
  const txt=floorCounterValue===null?'------':String(floorCounterValue).padStart(6,'0').slice(-6);
  const patterns={0:'abcdef',1:'bc',2:'abged',3:'abgcd',4:'fgbc',5:'afgcd',6:'afgecd',7:'abc',8:'abcdefg',9:'abfgcd','-':'g'};
  function digit(ch,dx,dy){
-  const l=dx+1,r=dx+14,t=dy+1,m=dy+8.7,b=dy+17;
-  const seg={a:[l,t,r,t],b:[r+0.6,t+1.6,r+0.6,m-1.6],c:[r+0.6,m+1.6,r+0.6,b-1.6],d:[l,b,r,b],e:[l-0.6,m+1.6,l-0.6,b-1.6],f:[l-0.6,t+1.6,l-0.6,m-1.6],g:[l,m,r,m]};
-  g.lineCap='butt';g.lineWidth=2.15;
+  const l=dx+1,r=dx+15,t=dy+1,m=dy+9.4,b=dy+19;
+  const seg={a:[l,t,r,t],b:[r+.6,t+1.6,r+.6,m-1.6],c:[r+.6,m+1.6,r+.6,b-1.6],d:[l,b,r,b],e:[l-.6,m+1.6,l-.6,b-1.6],f:[l-.6,t+1.6,l-.6,m-1.6],g:[l,m,r,m]};
+  g.lineCap='butt';g.lineWidth=2.25;
   for(const [id,pts] of Object.entries(seg)){
    const on=(patterns[ch]||'').includes(id);
-   g.strokeStyle=on?'#ff2b22':'#240b0a';
-   g.shadowColor=on?'rgba(255,44,33,.45)':'transparent';g.shadowBlur=on?2.2:0;
+   g.strokeStyle=on?'#ff3028':'#270d0b';
+   g.shadowColor=on?'rgba(255,47,35,.48)':'transparent';g.shadowBlur=on?2.2:0;
    g.beginPath();g.moveTo(pts[0],pts[1]);g.lineTo(pts[2],pts[3]);g.stroke();
   }
   g.shadowBlur=0;
  }
- for(let i=0;i<txt.length;i++)digit(txt[i],x+18+i*17,y+12);
+ // Larger separation between header and digits, without widening each numeral.
+ for(let i=0;i<txt.length;i++)digit(txt[i],x+21+i*23,y+27);
  g.restore();
 }
 function drawPatrolFloor(){
