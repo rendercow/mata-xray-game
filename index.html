@@ -28,6 +28,14 @@ body.mobile-mode .mobileTip.show{display:block}
 body.mobile-mode.portrait-play .mobileShell{grid-template-rows:40px minmax(0,1fr) 54px}
 @media(orientation:portrait){body.mobile-mode .mobileHUD{font-size:11px}body.mobile-mode .mobileControls button{font-size:12px}}
 
+/* v4.2.7 mobile viewport stabilization and safe-area sizing */
+body.mobile-mode .mobileShell{box-sizing:border-box;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+body.mobile-mode .mobileHUD{padding:2px 10px}
+body.mobile-mode .mobileControls{padding:3px 8px}
+body.mobile-mode .mobileControls button{min-height:36px}
+body.mobile-mode .rotateNotice{padding:calc(20px + env(safe-area-inset-top,0px)) calc(20px + env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) calc(20px + env(safe-area-inset-left,0px))}
+body.mobile-mode .mobileTip{bottom:calc(var(--control-height,46px) + env(safe-area-inset-bottom,0px) + 8px)}
+
 /* ARCADE HALL OF FAME */
 .scoreboardTrigger{background:#143a59;color:#e4f5ff;box-shadow:0 4px #082741;padding:11px 15px;font-size:13px}
 .arcadeModal[hidden]{display:none!important}
@@ -385,7 +393,12 @@ let portraitPlay=false, mobileTipTimer=null;
 if(mobileMode){document.body.classList.add('mobile-mode');document.documentElement.classList.add('mobile-root')}
 function mobileViewportSize(){
  const vp=window.visualViewport;
- return {width:vp?.width||window.innerWidth,height:vp?.height||window.innerHeight};
+ return {
+  width:Math.max(1,Number(vp?.width)||window.innerWidth),
+  height:Math.max(1,Number(vp?.height)||window.innerHeight),
+  offsetLeft:Number(vp?.offsetLeft)||0,
+  offsetTop:Number(vp?.offsetTop)||0
+ };
 }
 function isPortrait(){
  const {width,height}=mobileViewportSize();
@@ -395,24 +408,25 @@ function mobileMessage(msg){if(!mobileMode)return;const tip=$('mobileTip');if(!t
 function mobilePauseForRotation(){if(!running||paused)return;paused=true;cancelAnimationFrame(raf);pantAudio.pause();barkAudio.pause();$('pause').textContent='계속하기';safeRender('rotation pause',()=>draw());}
 function fitMobileStage(){
  if(!mobileMode)return;
- const vp=window.visualViewport;
- const {width,height}=mobileViewportSize();
- const root=document.body;
- // Safari address bar and toolbars are excluded from visualViewport.
+ const {width,height,offsetLeft,offsetTop}=mobileViewportSize();
+ const root=document.body,shell=$('mobileShell');
  root.style.setProperty('--vp-width',width+'px');root.style.setProperty('--vp-height',height+'px');
- root.style.setProperty('--vp-top',(vp?.offsetTop||0)+'px');root.style.setProperty('--vp-left',(vp?.offsetLeft||0)+'px');
- root.style.setProperty('--safe-area-left','env(safe-area-inset-left)');root.style.setProperty('--safe-area-right','env(safe-area-inset-right)');
+ root.style.setProperty('--vp-top',offsetTop+'px');root.style.setProperty('--vp-left',offsetLeft+'px');
+ const shellStyle=getComputedStyle(shell);
+ const insetLeft=parseFloat(shellStyle.paddingLeft)||0,insetRight=parseFloat(shellStyle.paddingRight)||0;
+ const insetTop=parseFloat(shellStyle.paddingTop)||0,insetBottom=parseFloat(shellStyle.paddingBottom)||0;
+ const usableWidth=Math.max(1,shell.clientWidth-insetLeft-insetRight);
+ const usableHeight=Math.max(1,shell.clientHeight-insetTop-insetBottom);
  const landscape=width>height;
  const hudHeight=landscape?(height<380?28:34):40;
  const buttonHeight=landscape?(height<380?43:46):54;
  root.style.setProperty('--hud-height',hudHeight+'px');root.style.setProperty('--control-height',buttonHeight+'px');
- const availableHeight=Math.max(1,height-hudHeight-buttonHeight);
- // Keep the game canvas clear of the iPhone landscape notch / safe-area edges.
- const safeWidth=Math.max(1,width-(parseFloat(getComputedStyle(root).getPropertyValue('--safe-area-left'))||0)
-                              -(parseFloat(getComputedStyle(root).getPropertyValue('--safe-area-right'))||0)-4);
- const stageWidth=Math.max(1,Math.min(safeWidth,availableHeight*1120/590));
- root.style.setProperty('--stage-width',stageWidth+'px');
- root.style.setProperty('--stage-height',(stageWidth*590/1120)+'px');
+ const frameBorder=4;
+ const availableHeight=Math.max(1,usableHeight-hudHeight-buttonHeight);
+ // Fit the 1120×590 drawing area inside the CSS env() safe-area insets.
+ const canvasWidth=Math.max(1,Math.min(usableWidth-frameBorder,(availableHeight-frameBorder)*1120/590));
+ root.style.setProperty('--stage-width',(canvasWidth+frameBorder)+'px');
+ root.style.setProperty('--stage-height',(canvasWidth*590/1120+frameBorder)+'px');
  root.classList.toggle('portrait-notice',!landscape&&!portraitPlay);
  root.classList.toggle('portrait-play',!landscape&&portraitPlay);
 }
@@ -433,15 +447,26 @@ function requestMobileFullscreen(){
  if(action?.then)action.then(()=>{try{screen.orientation?.lock?.('landscape')?.catch?.(()=>{});}catch(e){}fitMobileStage();syncMobileUI()}).catch(()=>mobileMessage('이 브라우저는 전체화면 전환을 허용하지 않아요.'));}
  catch(e){mobileMessage('전체화면 전환이 지원되지 않는 브라우저예요.')}
 }
-let mobileLayoutRaf=0;
+let mobileLayoutRaf=0,mobileLayoutTimer=0;
 function scheduleMobileLayout(){
- if(!mobileMode||mobileLayoutRaf)return;
- mobileLayoutRaf=requestAnimationFrame(()=>{
-  mobileLayoutRaf=0;
+ if(!mobileMode)return;
+ if(!mobileLayoutRaf){
+  const started=performance.now();let previous=null,stableFrames=0;
+  const settle=()=>{
+   const current=mobileViewportSize();
+   const unchanged=previous&&Math.abs(current.width-previous.width)<.5&&Math.abs(current.height-previous.height)<.5&&Math.abs(current.offsetLeft-previous.offsetLeft)<.5&&Math.abs(current.offsetTop-previous.offsetTop)<.5;
+   stableFrames=unchanged?stableFrames+1:0;previous=current;
+   if(stableFrames>=2||performance.now()-started>=900){mobileLayoutRaf=0;handleMobileOrientation();return;}
+   mobileLayoutRaf=requestAnimationFrame(settle);
+  };
+  mobileLayoutRaf=requestAnimationFrame(settle);
+ }
+ // Safari may continue animating the visual viewport after the first resize frames.
+ clearTimeout(mobileLayoutTimer);
+ mobileLayoutTimer=setTimeout(()=>{
+  if(mobileLayoutRaf){cancelAnimationFrame(mobileLayoutRaf);mobileLayoutRaf=0;}
   handleMobileOrientation();
-  // iOS Safari can publish the new visualViewport one frame after rotation.
-  requestAnimationFrame(()=>{if(mobileMode)handleMobileOrientation()});
- });
+ },700);
 }
 function handleMobileOrientation(){
  if(!mobileMode)return;
