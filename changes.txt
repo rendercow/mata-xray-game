@@ -1,0 +1,15 @@
+마타의 X-RAY 탐지 대작전 - iPhone 가로화면 대응 수정
+
+수정 내용
+1. 화면 방향 판정을 window.innerWidth/innerHeight 대신 iOS Safari visualViewport 기준으로 통일했습니다.
+2. 회전 직후 Safari가 새 visualViewport 크기를 한 프레임 늦게 반영하는 경우를 고려해 requestAnimationFrame으로 레이아웃을 재계산합니다.
+3. Safari 주소창/툴바 변화, 화면 회전, 전체화면 변경, 페이지 복귀(pageshow)에 대응하도록 모바일 레이아웃 갱신 이벤트를 정리했습니다.
+4. iPhone 가로모드의 좌우 safe-area(노치/센서 하우징 영역)를 고려해 게임 캔버스 폭을 계산합니다.
+
+변경 범위
+- index.html의 모바일 뷰포트 판정 및 모바일 레이아웃 갱신 부분만 수정했습니다.
+- 게임 플레이 로직, 점수 체계, 그래픽 에셋, PC 레이아웃, Supabase 연동 코드는 의도적으로 수정하지 않았습니다.
+
+검증
+- index.html의 인라인 JavaScript를 추출해 Node.js 구문 검사(node --check)를 통과했습니다.
+- 실제 iPhone Safari 기기에서의 화면 확인은 아직 수행하지 못했습니다.
