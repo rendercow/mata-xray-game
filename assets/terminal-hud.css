@@ -8,7 +8,7 @@ body{background:radial-gradient(ellipse at 18% 0%,#255b7b,#102c45 56%,#081b2d);c
 .storageCell.flash{animation:terminalBinFlash .28s ease-out}
 button:focus-visible{outline:3px solid #8fe7ff;outline-offset:3px}
 @keyframes terminalBinFlash{from{background:#39738a;border-color:#b9f1ff}to{background:#142f41;border-color:#375d72}}
-@media(min-width:901px){
+@media(min-width:801px){
  main{padding-top:10px}
  .dashboard{padding:12px 13px 12px 242px;border:2px solid #357ca7;border-radius:19px;background:#092944 url('airport-terminal.svg') center/cover no-repeat;box-shadow:inset 0 1px #b5eaff55,0 5px 0 #061b30,0 12px 24px #02142150;isolation:isolate}
  .dashboard::after{content:'';position:absolute;inset:0;z-index:-1;border-radius:17px;background:linear-gradient(90deg,transparent 12%,#082c4b66 24%,#082842aa 100%);pointer-events:none}
@@ -38,7 +38,7 @@ button:focus-visible{outline:3px solid #8fe7ff;outline-offset:3px}
  #start::before{content:'↻'}#pause::before{content:'Ⅱ'}#sound::before{content:'♪'}#showHelp::before{content:'?'}
  .stageWrap{border:3px solid #427c9d;border-radius:14px;background:#09243a;box-shadow:0 5px #041a2b,0 12px 22px #020c1650;margin-top:11px}
 }
-@media(min-width:901px) and (max-width:1100px){
+@media(min-width:801px) and (max-width:1100px){
  .dashboard{padding-left:210px}.hero{width:188px}.heroMata{width:198px;left:-4px}
  h1{font-size:20px}.pill{font-size:9px}.controls button{padding:0 7px;font-size:10px}.controls button::before{margin-right:3px}
 }
@@ -67,7 +67,7 @@ button:focus-visible{outline:3px solid #8fe7ff;outline-offset:3px}
 .helpPanel .closeHelp{display:block;margin:13px auto 0;padding:10px 25px;border-radius:10px;background:#ffd16b;color:#49310b;box-shadow:0 3px #a4782a;font-size:13px}
 @media(max-width:600px){.helpPanel{padding:14px 16px}.helpContent{grid-template-columns:1fr;gap:13px}.helpPanel h2{font-size:21px}.helpPanel .helpIntro{font-size:12px;margin-bottom:11px}.helpScore{min-height:66px;padding:8px}.helpScore strong{font-size:20px}.helpTips{gap:8px}.helpTips p{font-size:11px}.helpPanel .helpFootnote{margin-top:9px}}
 @media(max-height:500px) and (min-width:601px){.helpPanel{padding:11px 17px;max-width:760px}.helpPanel h2{font-size:19px;margin-bottom:6px}.helpPanel .helpIntro{margin-bottom:9px;font-size:12px}.helpScore{min-height:65px;padding:7px}.helpScore strong{font-size:19px}.helpTips{gap:8px}.helpPanel .helpFootnote{margin-top:7px}.helpPanel .closeHelp{margin-top:9px;padding:8px 20px}}
-@media(min-width:901px){
+@media(min-width:801px){
  .dashboard{display:block;position:relative;padding:0;border:0;border-radius:0;aspect-ratio:2048/456;min-height:0;height:auto;background:#062944;box-shadow:0 5px #061b30,0 10px 24px #020e1a66;container-type:inline-size;isolation:isolate;overflow:hidden}
  .dashboard::after{display:none}
  .t2Artwork{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
@@ -115,7 +115,7 @@ button:focus-visible{outline:3px solid #8fe7ff;outline-offset:3px}
 }
 /* One cohesive animated bust family replaces the former full-body illustration. */
 .t2PortraitSill{display:none}
-@media(min-width:901px){
+@media(min-width:801px){
  .t2PortraitSill{display:block;position:absolute;overflow:hidden;z-index:2;pointer-events:none}
  .t2PortraitSill img{display:block;position:absolute;max-width:none}
  .dashboard .t2Patch-portrait{display:block}
